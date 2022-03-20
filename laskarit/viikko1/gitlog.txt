@@ -1,0 +1,113 @@
+commit b018f14a4f6eb32257d120afead859a2a2d788e9
+Author: juhanikat <juhani.kataja@gmail.com>
+Date:   Sun Mar 20 16:23:48 2022 +0200
+
+    muokkauksia
+
+ tiedostoja/file2             | 0
+ tiedostoja/{file1 => file22} | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 47c611e91764701a9fab1c5e832b6a81787ea3ab
+Author: juhanikat <juhani.kataja@gmail.com>
+Date:   Sun Mar 20 16:21:42 2022 +0200
+
+    lisätty tiedostoja
+
+ tiedostoja/file1 | 0
+ tiedostoja/file2 | 0
+ tiedostoja/file3 | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 29bec2e741ae58800b3af35b5c660681743cc3e9
+Author: juhanikat <juhani.kataja@gmail.com>
+Date:   Sun Mar 20 16:19:11 2022 +0200
+
+    muutoksia lisää
+
+ eka.txt    | 2 +-
+ kolmas.txt | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+commit ce92b8246b4517a9bfd381b16773230487e5240e
+Author: juhanikat <juhani.kataja@gmail.com>
+Date:   Sun Mar 20 16:17:28 2022 +0200
+
+    uudelleennimetty tiedosto.txt
+
+ tiedosto.txt => eka.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 284b881c907a09e7e8b05e01bc189364c3515ce2
+Author: juhanikat <juhani.kataja@gmail.com>
+Date:   Sun Mar 20 16:16:52 2022 +0200
+
+    poistettu toinen
+
+ toinen.txt | 1 -
+ 1 file changed, 1 deletion(-)
+
+commit c087b9fa6eab8179d8bab90cab1d19bb935b3342
+Author: juhanikat <juhani.kataja@gmail.com>
+Date:   Sun Mar 20 16:15:20 2022 +0200
+
+    lisää tekstiä
+
+ tiedosto.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit b424be1c6c4059f633639dfb916f778789940f8a
+Author: juhanikat <juhani.kataja@gmail.com>
+Date:   Sun Mar 20 16:14:22 2022 +0200
+
+    tekstiä
+
+ tiedosto.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 1551e2931142768123e97f3a4aeee1ef06d11e4a
+Author: juhanikat <juhani.kataja@gmail.com>
+Date:   Sun Mar 20 16:11:34 2022 +0200
+
+    lisätty stuff
+
+ stuff/neljas.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit e9dde3e9f1b3733bf8a4802a184e681aefed2831
+Author: juhanikat <juhani.kataja@gmail.com>
+Date:   Sun Mar 20 16:11:03 2022 +0200
+
+    muutoksia
+
+ kolmas.txt | 1 +
+ toinen.txt | 1 +
+ 2 files changed, 2 insertions(+)
+
+commit 34617402d9951e57263cd30e9be30b93b0d15bdc
+Author: juhanikat <juhani.kataja@gmail.com>
+Date:   Sun Mar 20 16:10:35 2022 +0200
+
+    lisätty kolmas
+
+ kolmas.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit d79fca5d82463d5b0719b2d2314704453228f547
+Author: juhanikat <juhani.kataja@gmail.com>
+Date:   Sun Mar 20 16:09:40 2022 +0200
+
+    muutos ja lisäys
+
+ tiedosto.txt | 1 +
+ toinen.txt   | 0
+ 2 files changed, 1 insertion(+)
+
+commit e19736055ace747804fb908afee49038195ea8e5
+Author: juhanikat <juhani.kataja@gmail.com>
+Date:   Sun Mar 20 16:08:52 2022 +0200
+
+    tiedosto.txt luotu
+
+ tiedosto.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
