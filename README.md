@@ -1,9 +1,8 @@
-# Viikko 1
+# Dictionary Game
 
-Tekstiä, joka on **lihavoitu** ja *kursivoitu*.
 
-Lisää tekstiä.
+## Dokumentaatio
 
-[gitlog](https://github.com/juhanikat/ot-harjoitustyo/blob/master/laskarit/viikko1/gitlog.txt)
+[Vaatimusmäärittely](https://github.com/juhanikat/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmäärittely.md)
 
-[komentorivi](https://github.com/juhanikat/ot-harjoitustyo/blob/master/laskarit/viikko1/komentorivi.txt)
+[Työaikakirjanpito](https://github.com/juhanikat/ot-harjoitustyo/blob/master/dokumentaatio/tuntikirjanpito.md)
