@@ -2,18 +2,52 @@
     <item>
         <word>access</word>
         <definitions>
-            <defn>the ability, right, or permission to approach, enter, speak with, or use; admittance</defn>
-            <defn>the state or quality of being approachable</defn>
-            <defn>a way or means of approach</defn>
+            <nouns>
+                <defn>the ability, right, or permission to approach, enter, speak with, or use; admittance</defn>
+                <defn>the state or quality of being approachable</defn>
+                <defn>a way or means of approach</defn>
+            </nouns>
         </definitions>
     </item>
 
     <item>
         <word>region</word>
         <definitions>
-            <defn>an extensive, continuous part of a surface, space, or body</defn>
-            <defn>a part of the earth's surface (land or sea) of considerable and usually indefinite extent</defn>
-            <defn>a district without respect to boundaries or extent</defn>
+            <nouns>
+                <defn>an extensive, continuous part of a surface, space, or body</defn>
+                <defn>a part of the earth's surface (land or sea) of considerable and usually indefinite extent</defn>
+                <defn>a district without respect to boundaries or extent</defn>
+            </nouns>
+        </definitions>
+    </item>
+
+    <item>
+        <word>anybody</word>
+        <definitions>
+            <pronouns>
+                <defn>any person</defn>
+            </pronouns>
+        </definitions>
+    </item>
+
+    <item>
+        <word>between</word>
+        <definitions>
+            <prepositions>
+                <defn>in the space separating (two points, objects, etc.): </defn>
+            </prepositions>
+            <adverbs>
+                <defn>in the intervening space or time; in an intermediate position or relation</defn>
+            </adverbs>
+        </definitions>
+    </item>
+
+    <item>
+        <word>book</word>
+        <definitions>
+            <nouns>
+                <defn>a handwritten or printed work of fiction or nonfiction, usually on sheets of paper fastened or bound together within covers.</defn>
+            </nouns>
         </definitions>
     </item>
 </dictionary>
