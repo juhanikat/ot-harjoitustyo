@@ -13,3 +13,4 @@ Peli antaa pelaajalle satunnaisesti valitun sanan määritelmän, jonka avulla p
 - Tietokanta, joka pitää kirjaa pelin pelaajien pisteistä
 - Peli voi antaa vihjeitä pelaajalle
   - Vihjeiden käyttäminen alentaa sanan arvaamisesta saatua pistemäärää
+- Peli voi kertoa, onko pelaajan arvaus lähellä oikeaa sanaa
