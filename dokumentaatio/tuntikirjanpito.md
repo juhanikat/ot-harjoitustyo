@@ -5,6 +5,6 @@
 | 28.3 | 1 | Muokatun sanakirjatiedoston luominen |
 | 01.4 | 2 | Pelin rungon luominen |
 | 02.4 | 1 | Lisää toiminnallisuutta ja testejä |
-| 04.4 | 2 | Bugien korjausta ja lisää toiminnallisuutta |
+| 04.4 | 4 | Bugien korjausta, dictionary.xml tiedoston muokkausta ja lisää toiminnallisuutta |
 
-| Yhteensä | 8 |
+| Yhteensä | 10 |

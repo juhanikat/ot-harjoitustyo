@@ -1,23 +1,24 @@
-from lxml import etree
 import os
 import random
 from pathlib import Path
 
-class Dictionary:
+from lxml import etree
 
+
+class Dictionary:
     def __init__(self) -> None:
         source_path = Path(__file__).resolve()
         source_dir = source_path.parent
-        dict_path = source_dir.joinpath('dictionary.xml')
+        dict_path = source_dir.joinpath("dictionary.xml")
         if not os.path.isfile(dict_path):
             print("No dictionary.xml found!")
             exit()
-        with open(dict_path, 'r') as xml:
+        with open(dict_path, "r") as xml:
             tree = etree.parse(xml)
         self.dictionary = tree.getroot()
         self.dictionary_length = len(self.dictionary)
 
-    def get_random_item(self, excluded : list = None):
+    def get_random_item(self, excluded: list = None):
         if len(excluded) == self.dictionary_length:
             return False
         while True:
@@ -31,11 +32,8 @@ class Dictionary:
 
     def get_readable_definitions(self, item):
         result = ""
-        for category in item[1]:
-            result+=f"{category.tag.capitalize()}:\n"
-            i = 1
-            for defn in category:
-                result+=f"{i}. {defn.text}\n"
-                i+= 1
+        i = 1
+        for defn in item[1:8]:
+            result += f"{i}. {defn.text}\n"
+            i += 1
         return result
-
