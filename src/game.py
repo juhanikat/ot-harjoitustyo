@@ -27,15 +27,16 @@ class Game:
                 print("You got through every word in the dictionary, congrats!")
                 self.end_game()
             seen.append(item)
-            word = self.d.get_readable_word(item)
+            word = item.get_readable_word()
             revealed_word = "".join(["_"] * len(word))
             print()
             print("----------------------")
             print(f"Guess this {len(word)} letter word: ")
-            print(self.d.get_readable_definitions(item))
+            print(item.get_readable_definitions())
             while True:
                 print("(Input q to quit, s to skip, or h to reveal a letter)")
-                answer = input("The word is: ").strip().lower()
+                answer = input("The word is: ")
+                answer = answer.strip().lower()
                 if answer == "q":
                     self.end_game()
                 elif answer == "s":
