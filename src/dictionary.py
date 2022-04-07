@@ -1,5 +1,6 @@
 import os
 import random
+import sys
 from pathlib import Path
 
 from lxml import etree
@@ -31,7 +32,7 @@ class Dictionary:
         dict_path = source_dir.joinpath("dictionary.xml")
         if not os.path.isfile(dict_path):
             print("No dictionary.xml found!")
-            exit()
+            sys.exit()
         with open(dict_path, "r") as xml:
             tree = etree.parse(xml)
         self.dictionary = tree.getroot()

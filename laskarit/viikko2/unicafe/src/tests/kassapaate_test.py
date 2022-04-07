@@ -73,7 +73,7 @@ class TestKassapaate(unittest.TestCase):
 
         self.assertEqual(maksukortti.saldo, 100)
         self.assertEqual(self.kassapaate.kassassa_rahaa, 100100)
-    
+
     def test_kortin_lataaminen_negatiivisella_maaralla_toimii(self):
         maksukortti = Maksukortti(0)
         self.kassapaate.lataa_rahaa_kortille(maksukortti, -5)

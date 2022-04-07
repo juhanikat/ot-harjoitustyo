@@ -12,6 +12,11 @@ def test(ctx):
 
 
 @task
+def format(ctx):
+    ctx.run("black src", pty=True)
+
+
+@task
 def coverage(ctx):
     ctx.run("coverage run --branch -m pytest src", pty=True)
 

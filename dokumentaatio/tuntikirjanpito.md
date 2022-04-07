@@ -6,5 +6,6 @@
 | 01.4 | 2 | Pelin rungon luominen |
 | 02.4 | 1 | Lisää toiminnallisuutta ja testejä |
 | 04.4 | 4 | Bugien korjausta, dictionary.xml tiedoston muokkausta ja lisää toiminnallisuutta |
+| 07.4 | 2 | Korjattu pylintin huomauttamia ongelmia ja lisätty uusi task |
 
-| Yhteensä | 10 |
+| Yhteensä | 12 |
