@@ -1,7 +1,6 @@
 import os
 import random
 import sys
-from pathlib import Path
 
 from lxml import etree
 
@@ -11,7 +10,7 @@ class Item:
         self.word = string[0].text.strip()
         self.definitions = []
         for defn in string[1:]:
-            self.definitions.append(defn.text)
+            self.definitions.append(defn.text.strip())
 
     def get_readable_word(self):
         return self.word
@@ -20,12 +19,12 @@ class Item:
         result = ""
         i = 1
         for defn in self.definitions:
-            result += f"{i}. {defn}\n"
+            result += f"{i}. {defn}"
             i += 1
         return result
 
 
-class Dictionary:
+class DictionaryService:
     def __init__(self):
         source_path = os.path.dirname(__file__)
         dict_path = os.path.join(source_path, "..", "..", "data/dictionary.xml")
@@ -45,3 +44,6 @@ class Dictionary:
             if item not in excluded:
                 break
         return item
+
+
+dictionary_service = DictionaryService()
