@@ -5,3 +5,5 @@
 - Lisätty luokka Dictionary, joka toteuttaa sanakirjan toiminnallisuuden kuten satunnaisen sanan hakemisen
 
 ## Viikko 4
+
+- Lisätty osa graafisesta käyttöliittymästä

@@ -7,5 +7,6 @@
 | 02.4 | 1 | Lisää toiminnallisuutta ja testejä |
 | 04.4 | 4 | Bugien korjausta, dictionary.xml tiedoston muokkausta ja lisää toiminnallisuutta |
 | 07.4 | 2 | Korjattu pylintin huomauttamia ongelmia ja lisätty uusi task |
+| 11.4 | 3 | UI osittain valmis, GameServicen luontia |
 
-| Yhteensä | 12 |
+| Yhteensä | 15 |

@@ -7,7 +7,7 @@ from lxml import etree
 
 
 class Item:
-    def __init__(self, string) -> None:
+    def __init__(self, string):
         self.word = string[0].text.strip()
         self.definitions = []
         for defn in string[1:]:
@@ -26,10 +26,9 @@ class Item:
 
 
 class Dictionary:
-    def __init__(self) -> None:
-        source_path = Path(__file__).resolve()
-        source_dir = source_path.parent
-        dict_path = source_dir.joinpath("dictionary.xml")
+    def __init__(self):
+        source_path = os.path.dirname(__file__)
+        dict_path = os.path.join(source_path, "..", "..", "data/dictionary.xml")
         if not os.path.isfile(dict_path):
             print("No dictionary.xml found!")
             sys.exit()
