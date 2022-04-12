@@ -1,5 +1,5 @@
 import tkinter
-from tkinter import Tk, ttk, constants
+from tkinter import ttk, constants
 from services.game_service import game_service
 
 
@@ -18,7 +18,10 @@ class MainView:
     def handle_submit_button_click(self, answer: str):
         result = game_service.check_answer(answer)
         if result is True:
+            total_points = game_service.get_total_points()
             self.insert_to_textbox(f"Correct! The word was {answer}.")
+            self.insert_to_textbox(f"+{total_points} points")
+            self.points_label.config(text=f"Points: {total_points}")
         else:
             self.insert_to_textbox(f"Wrong, try again!")
 
@@ -36,6 +39,7 @@ class MainView:
     def handle_hint_button_click(self):
         game_service.reveal_next_letter()
         self.underscores_label.config(text=game_service.get_readable_underscores())
+        self.points_to_gain_label.config(text=game_service.get_points_to_gain())
 
     def clear_textbox(self):
         self.textbox.config(state="normal")
@@ -54,6 +58,10 @@ class MainView:
 
         self.underscores_label = ttk.Label(master=self.answer_frame)
         answer_label = ttk.Label(master=self.answer_frame, text="The word is: ")
+        self.total_points_label = ttk.Label(master=self.answer_frame, text="Points: 0")
+        self.points_to_gain_label = ttk.Label(
+            master=self.answer_frame, text="Points to gain: 0"
+        )
         answer_entry = ttk.Entry(master=self.answer_frame)
         new_word_button = ttk.Button(
             master=self.answer_frame,
@@ -72,6 +80,8 @@ class MainView:
         )
 
         self.underscores_label.grid(row=2, column=0)
+        self.total_points_label.grid(row=2, column=1)
+        self.points_to_gain_label.grid(row=2, column=2)
         answer_label.grid(row=0, column=0)
         answer_entry.grid(row=0, column=1)
         submit_button.grid(row=1, column=0)
@@ -81,6 +91,7 @@ class MainView:
 
         definitions = game_service.get_readable_definitions()
         self.underscores_label.config(text=game_service.get_readable_underscores())
+        self.points_to_gain_label.config(text=game_service.get_points_to_gain())
         self.insert_to_textbox(
             f"Guess the following {game_service.get_word_length()} letter word: "
         )

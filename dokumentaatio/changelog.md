@@ -7,3 +7,4 @@
 ## Viikko 4
 
 - Lisätty osa graafisesta käyttöliittymästä
+- Lisätty pistelaskuri

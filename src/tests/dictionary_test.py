@@ -9,11 +9,11 @@ class TestGame(unittest.TestCase):
         self.item = game_service.new_item()
 
     def test_get_readable_word_returns_string(self):
-        word = self.item.get_readable_word()
+        word = self.item.get_word()
         self.assertIsInstance(word, str)
 
     def test_check_answer_return_correct_truth_value(self):
-        word = self.item.get_readable_word()
+        word = self.item.get_word()
         result = game_service.check_answer(word)
         self.assertEqual(result, True)
         result = game_service.check_answer("asdasdasdasdasd")
