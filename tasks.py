@@ -12,6 +12,11 @@ def test(ctx):
 
 
 @task
+def lint(ctx):
+    ctx.run("pylint src", pty=True)
+
+
+@task
 def format(ctx):
     ctx.run("black src", pty=True)
 

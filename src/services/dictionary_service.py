@@ -12,16 +12,11 @@ class Item:
         for defn in string[1:]:
             self.definitions.append(defn.text.strip())
 
-    def get_readable_word(self):
+    def get_word(self):
         return self.word
 
-    def get_readable_definitions(self):
-        result = ""
-        i = 1
-        for defn in self.definitions:
-            result += f"{i}. {defn}"
-            i += 1
-        return result
+    def get_definitions(self):
+        return self.definitions
 
 
 class DictionaryService:

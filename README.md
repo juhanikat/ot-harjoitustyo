@@ -9,6 +9,8 @@ Peli antaa pelaajalle satunnaisesti valitun sanan määritelmän, jonka avulla p
 
 [Changelog](https://github.com/juhanikat/ot-harjoitustyo/blob/master/dokumentaatio/changelog.md)
 
+[Arkkitehtuuri](https://github.com/juhanikat/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
+
 ## Asennus
 
 Riippuvuudet asennetaan komennolla:

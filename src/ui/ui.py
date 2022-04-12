@@ -27,7 +27,9 @@ class MainView:
         definitions = game_service.get_readable_definitions()
         self.clear_textbox()
         self.underscores_label.config(text=game_service.get_readable_underscores())
-        self.insert_to_textbox(f"Guess the following {game_service.get_word_length()} letter word: ")
+        self.insert_to_textbox(
+            f"Guess the following {game_service.get_word_length()} letter word: "
+        )
         for defn in definitions:
             self.insert_to_textbox(defn)
 
@@ -53,8 +55,16 @@ class MainView:
         self.underscores_label = ttk.Label(master=self.answer_frame)
         answer_label = ttk.Label(master=self.answer_frame, text="The word is: ")
         answer_entry = ttk.Entry(master=self.answer_frame)
-        new_word_button = ttk.Button(master=self.answer_frame, text="New Word", command=lambda: self.handle_new_word_button_click())
-        hint_button = ttk.Button(master=self.answer_frame, text="Hint", command=lambda: self.handle_hint_button_click())
+        new_word_button = ttk.Button(
+            master=self.answer_frame,
+            text="New Word",
+            command=lambda: self.handle_new_word_button_click(),
+        )
+        hint_button = ttk.Button(
+            master=self.answer_frame,
+            text="Hint",
+            command=lambda: self.handle_hint_button_click(),
+        )
         submit_button = ttk.Button(
             master=self.answer_frame,
             text="Submit",
@@ -71,7 +81,9 @@ class MainView:
 
         definitions = game_service.get_readable_definitions()
         self.underscores_label.config(text=game_service.get_readable_underscores())
-        self.insert_to_textbox(f"Guess the following {game_service.get_word_length()} letter word: ")
+        self.insert_to_textbox(
+            f"Guess the following {game_service.get_word_length()} letter word: "
+        )
         for defn in definitions:
             self.insert_to_textbox(defn)
 
