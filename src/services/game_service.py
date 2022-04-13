@@ -51,7 +51,6 @@ class GameService:
                 self.total_points += self.points_to_gain
                 self.points_to_gain = 0
                 return True
-            return False
         return False
 
     def get_readable_definitions(self):

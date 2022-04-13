@@ -1,3 +1,4 @@
+from gc import garbage
 import tkinter
 from tkinter import ttk, constants
 from services.game_service import game_service
@@ -15,31 +16,35 @@ class MainView:
         self.answer_frame.pack()
         self.definitions_frame.pack(fill="both")
 
+    def update(self):
+        total_points = game_service.get_total_points()
+        points_to_gain = game_service.get_points_to_gain()
+        self.total_points_label.config(text=f"Points: {total_points}")
+        self.points_to_gain_label.config(text=f"Points to gain: {points_to_gain}")
+
     def handle_submit_button_click(self, answer: str):
         result = game_service.check_answer(answer)
         if result is True:
-            total_points = game_service.get_total_points()
             self.insert_to_textbox(f"Correct! The word was {answer}.")
-            self.insert_to_textbox(f"+{total_points} points")
-            self.points_label.config(text=f"Points: {total_points}")
+            self.insert_to_textbox(f"+{game_service.get_points_to_gain()} points")
         else:
             self.insert_to_textbox(f"Wrong, try again!")
+        self.update()
 
     def handle_new_word_button_click(self):
         game_service.new_item()
         definitions = game_service.get_readable_definitions()
         self.clear_textbox()
         self.underscores_label.config(text=game_service.get_readable_underscores())
-        self.insert_to_textbox(
-            f"Guess the following {game_service.get_word_length()} letter word: "
-        )
+        self.insert_to_textbox(f"Guess the following {game_service.get_word_length()} letter word: ")
         for defn in definitions:
             self.insert_to_textbox(defn)
+        self.update()
 
     def handle_hint_button_click(self):
         game_service.reveal_next_letter()
         self.underscores_label.config(text=game_service.get_readable_underscores())
-        self.points_to_gain_label.config(text=game_service.get_points_to_gain())
+        self.update()
 
     def clear_textbox(self):
         self.textbox.config(state="normal")
@@ -59,9 +64,7 @@ class MainView:
         self.underscores_label = ttk.Label(master=self.answer_frame)
         answer_label = ttk.Label(master=self.answer_frame, text="The word is: ")
         self.total_points_label = ttk.Label(master=self.answer_frame, text="Points: 0")
-        self.points_to_gain_label = ttk.Label(
-            master=self.answer_frame, text="Points to gain: 0"
-        )
+        self.points_to_gain_label = ttk.Label(master=self.answer_frame, text="Points to gain: 0")
         answer_entry = ttk.Entry(master=self.answer_frame)
         new_word_button = ttk.Button(
             master=self.answer_frame,
@@ -91,12 +94,10 @@ class MainView:
 
         definitions = game_service.get_readable_definitions()
         self.underscores_label.config(text=game_service.get_readable_underscores())
-        self.points_to_gain_label.config(text=game_service.get_points_to_gain())
-        self.insert_to_textbox(
-            f"Guess the following {game_service.get_word_length()} letter word: "
-        )
+        self.insert_to_textbox(f"Guess the following {game_service.get_word_length()} letter word: ")
         for defn in definitions:
             self.insert_to_textbox(defn)
+        self.update()
 
 
 class UI:
