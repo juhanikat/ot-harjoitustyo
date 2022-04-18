@@ -45,15 +45,19 @@ class GameService:
     def get_points_to_gain(self):
         return self.points_to_gain
 
+    def get_game_status(self):
+        return self.status
+
     def check_answer(self, answer):
+        """Returns True if the answer was correct, and False otherwise."""
         if self.current_item:
             if answer.strip() == self.current_item.get_word():
                 self.total_points += self.points_to_gain
-                self.points_to_gain = 0
                 return True
         return False
 
     def get_readable_definitions(self):
+        """Returns a list of definitions for the current word."""
         if self.current_item:
             result = []
             i = 1
