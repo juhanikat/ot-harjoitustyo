@@ -18,3 +18,19 @@ class TestGame(unittest.TestCase):
         self.assertEqual(result, True)
         result = game_service.check_answer("asdasdasdasdasd")
         self.assertEqual(result, False)
+
+    def test_reveal_next_letter_decreases_points(self):
+        self.assertEqual(game_service.get_points_to_gain(), 10)
+        game_service.reveal_next_letter()
+        self.assertEqual(game_service.get_points_to_gain(), 9)
+
+    def test_new_item_resets_points_to_gain(self):
+        game_service.reveal_next_letter()
+        self.assertEqual(game_service.get_points_to_gain(), 9)
+        game_service.new_item()
+        self.assertEqual(game_service.get_points_to_gain(), 10)
+
+    def test_points_to_gain_stays_positive(self):
+        for _ in range(20):
+            game_service.reveal_next_letter()
+        self.assertGreaterEqual(game_service.get_points_to_gain(), 0)

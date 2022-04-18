@@ -18,9 +18,10 @@ class GameService:
     def new_item(self):
         self.current_item = dictionary_service.get_random_item()
         word = self.current_item.get_word()
-        self.underscores = ["_" for _ in range(len(word))]
         self.places = list(range(len(word)))
         random.shuffle(self.places)
+        # reset underscores and points to gain
+        self.underscores = ["_" for _ in range(len(word))]
         self.points_to_gain = 10
         return self.current_item
 
@@ -49,7 +50,7 @@ class GameService:
         return self.status
 
     def check_answer(self, answer):
-        """Returns True if the answer was correct, and False otherwise."""
+        """Returns True and adds points if the answer was correct, and returns False otherwise."""
         if self.current_item:
             if answer.strip() == self.current_item.get_word():
                 self.total_points += self.points_to_gain
