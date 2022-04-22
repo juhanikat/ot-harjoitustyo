@@ -1,7 +1,7 @@
 import tkinter
-from tkinter import ttk, constants
+from tkinter import constants, ttk
+
 from services.game_service import game_service
-from services.add_word_service import add_word_service
 
 
 class AddWordsView:
@@ -84,9 +84,6 @@ class MainView:
         game_service.reveal_next_letter()
         self.underscores_label.config(text=game_service.get_readable_underscores())
         self.update()
-
-    def handle_change_view_button_click(self):
-        super().show_add_words_view()
 
     def clear_textbox(self):
         self.textbox.config(state="normal")
