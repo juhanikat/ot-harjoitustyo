@@ -21,6 +21,10 @@ class Item:
 
 class DictionaryService:
     def __init__(self):
+        self.dictionary = self.find_dictionary()
+        self.player_dictionary = self.find_player_dictionary()
+
+    def find_dictionary(self):
         source_path = os.path.dirname(__file__)
         dict_path = os.path.join(source_path, "..", "..", "data/dictionary.xml")
         if not os.path.isfile(dict_path):
@@ -28,11 +32,23 @@ class DictionaryService:
             sys.exit()
         with open(dict_path, "r") as xml:
             tree = etree.parse(xml)
-        self.dictionary = tree.getroot()
-        self.dictionary_length = len(self.dictionary)
+        return tree.getroot()
+
+    def find_player_dictionary(self):
+        source_path = os.path.dirname(__file__)
+        dict_path = os.path.join(source_path, "..", "..", "data/player_dictionary.xml")
+        if not os.path.isfile(dict_path):
+            print("No player_dictionary.xml found!")
+            sys.exit()
+        with open(dict_path, "r") as xml:
+            tree = etree.parse(xml)
+        return tree.getroot()
+
+    def add_to_player_dictionary(self, word: str, definitions: list):
+        pass
 
     def get_random_item(self, excluded: list = []):
-        if len(excluded) == self.dictionary_length:
+        if len(excluded) == len(self.dictionary):
             return False
         while True:
             item = Item(self.dictionary[random.randint(0, len(self.dictionary) - 1)])

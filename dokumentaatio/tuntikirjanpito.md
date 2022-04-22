@@ -10,4 +10,5 @@
 | 11.4     | 5               | UI osittain valmis, GameServicen luontia, lisää testejä                          |
 | 12.4     | 3               | dokumentaatiota                                                                  |
 | 18.4     | 1               | Bugien korjausta ja UI:n parantelua, lisää testejä                               |
+| 22.4 | 1 | Lisätty nappi joka vaihtaa näkymää |
 | Yhteensä | 21              |

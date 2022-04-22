@@ -1,5 +1,4 @@
 import random
-import sys
 
 from services.dictionary_service import Item, dictionary_service
 
@@ -45,9 +44,6 @@ class GameService:
 
     def get_points_to_gain(self):
         return self.points_to_gain
-
-    def get_game_status(self):
-        return self.status
 
     def check_answer(self, answer):
         """Returns True and adds points if the answer was correct, and returns False otherwise."""

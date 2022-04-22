@@ -1,15 +1,49 @@
 import tkinter
 from tkinter import ttk, constants
 from services.game_service import game_service
+from services.add_word_service import add_word_service
+
+
+class AddWordsView:
+    def __init__(self, root, show_main_view):
+        self.root = root
+        self.buttons_frame = None
+        self.show_main_view = show_main_view
+
+        self.initialize()
+
+    def pack(self):
+        self.buttons_frame.pack()
+
+    def destroy(self):
+        self.buttons_frame.destroy()
+
+    def handle_add_word_button_click(self):
+        pass
+
+    def initialize(self):
+        self.buttons_frame = ttk.Frame(master=self.root)
+        self.add_word_button = ttk.Button(master=self.buttons_frame, text="Add Word")
+        change_view_button = ttk.Button(
+            master=self.buttons_frame, text="Change View", command=self.show_main_view
+        )
+        self.add_word_button.pack()
+        change_view_button.pack()
 
 
 class MainView:
-    def __init__(self, root) -> None:
+    def __init__(self, root, show_add_words_view) -> None:
         self.root = root
-        self.frame = None
+        self.show_add_words_view = show_add_words_view
+        self.answer_frame = None
+        self.definitions_frame = None
         self.textbox = None
 
         self.initialize()
+
+    def destroy(self):
+        self.answer_frame.destroy()
+        self.definitions_frame.destroy()
 
     def pack(self):
         self.answer_frame.pack()
@@ -51,6 +85,9 @@ class MainView:
         self.underscores_label.config(text=game_service.get_readable_underscores())
         self.update()
 
+    def handle_change_view_button_click(self):
+        super().show_add_words_view()
+
     def clear_textbox(self):
         self.textbox.config(state="normal")
         self.textbox.delete(1.0, constants.END)
@@ -89,6 +126,11 @@ class MainView:
             text="Submit",
             command=lambda: self.handle_submit_button_click(answer_entry.get()),
         )
+        change_view_button = ttk.Button(
+            master=self.answer_frame,
+            text="Change View",
+            command=self.show_add_words_view,
+        )
 
         self.underscores_label.grid(row=2, column=0)
         self.total_points_label.grid(row=2, column=1)
@@ -98,6 +140,7 @@ class MainView:
         self.submit_button.grid(row=1, column=0)
         new_word_button.grid(row=1, column=1)
         self.hint_button.grid(row=1, column=2)
+        change_view_button.grid(row=1, column=3)
         self.textbox.pack(fill="both")
 
         definitions = game_service.get_readable_definitions()
@@ -113,10 +156,19 @@ class MainView:
 class UI:
     def __init__(self, root):
         self.root = root
+        self.current_view = None
 
     def show_main_view(self):
-        joku = MainView(self.root)
-        joku.pack()
+        if self.current_view:
+            self.current_view.destroy()
+        self.current_view = MainView(self.root, self.show_add_words_view)
+        self.current_view.pack()
+
+    def show_add_words_view(self):
+        if self.current_view:
+            self.current_view.destroy()
+        self.current_view = AddWordsView(self.root, self.show_main_view)
+        self.current_view.pack()
 
     def start(self):
         self.show_main_view()
