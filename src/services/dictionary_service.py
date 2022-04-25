@@ -44,8 +44,11 @@ class DictionaryService:
             tree = etree.parse(xml)
         return tree.getroot()
 
-    def add_to_player_dictionary(self, word: str, definitions: list):
-        pass
+    def add_to_player_dictionary(self, word: str, definitions_as_string: str):
+        definitions = definitions_as_string.split("\n")
+        definitions = [defn for defn in definitions if defn]  # removes empty lines
+        print(definitions)
+        # TODO: add word and definitions into player_dictionary.xml
 
     def get_random_item(self, excluded: list = []):
         if len(excluded) == len(self.dictionary):

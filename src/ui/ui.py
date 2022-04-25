@@ -2,32 +2,47 @@ import tkinter
 from tkinter import constants, ttk
 
 from services.game_service import game_service
+from services.dictionary_service import dictionary_service
 
 
 class AddWordsView:
     def __init__(self, root, show_main_view):
         self.root = root
         self.buttons_frame = None
+        self.textbox_frame = None
         self.show_main_view = show_main_view
 
         self.initialize()
 
     def pack(self):
         self.buttons_frame.pack()
+        self.textbox_frame.pack()
 
     def destroy(self):
         self.buttons_frame.destroy()
+        self.textbox_frame.destroy()
 
     def handle_add_word_button_click(self):
-        pass
+        word = self.word_entry.get()
+        definitions_as_string = self.definition_box.get("1.0", "end-1c")
+        dictionary_service.add_to_player_dictionary(word, definitions_as_string)
 
     def initialize(self):
         self.buttons_frame = ttk.Frame(master=self.root)
-        self.add_word_button = ttk.Button(master=self.buttons_frame, text="Add Word")
+        self.textbox_frame = ttk.Frame(master=self.root)
+        self.add_word_button = ttk.Button(
+            master=self.buttons_frame,
+            text="Add Word",
+            command=lambda: self.handle_add_word_button_click(),
+        )
+        self.word_entry = ttk.Entry(master=self.textbox_frame)
+        self.definition_box = tkinter.Text(master=self.textbox_frame)
         change_view_button = ttk.Button(
             master=self.buttons_frame, text="Change View", command=self.show_main_view
         )
         self.add_word_button.pack()
+        self.definition_box.pack()
+        self.word_entry.pack()
         change_view_button.pack()
 
 
@@ -70,6 +85,7 @@ class MainView:
         game_service.new_item()
         definitions = game_service.get_readable_definitions()
         self.clear_textbox()
+        self.answer_entry.delete(0, constants.END)
         self.underscores_label.config(text=game_service.get_readable_underscores())
         self.insert_to_textbox(
             f"Guess the following {game_service.get_word_length()} letter word: "
@@ -107,7 +123,7 @@ class MainView:
         self.points_to_gain_label = ttk.Label(
             master=self.answer_frame, text="Points to gain: 0"
         )
-        answer_entry = ttk.Entry(master=self.answer_frame)
+        self.answer_entry = ttk.Entry(master=self.answer_frame)
         new_word_button = ttk.Button(
             master=self.answer_frame,
             text="New Word",
@@ -121,7 +137,7 @@ class MainView:
         self.submit_button = ttk.Button(
             master=self.answer_frame,
             text="Submit",
-            command=lambda: self.handle_submit_button_click(answer_entry.get()),
+            command=lambda: self.handle_submit_button_click(self.answer_entry.get()),
         )
         change_view_button = ttk.Button(
             master=self.answer_frame,
@@ -133,7 +149,7 @@ class MainView:
         self.total_points_label.grid(row=2, column=1)
         self.points_to_gain_label.grid(row=2, column=2)
         answer_label.grid(row=0, column=0)
-        answer_entry.grid(row=0, column=1)
+        self.answer_entry.grid(row=0, column=1)
         self.submit_button.grid(row=1, column=0)
         new_word_button.grid(row=1, column=1)
         self.hint_button.grid(row=1, column=2)

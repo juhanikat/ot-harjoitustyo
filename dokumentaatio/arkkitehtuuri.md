@@ -21,13 +21,16 @@ Luokka UI on riippuvainen luokasta GameService, joka taas on riippuvainen luokis
 ```
 Käyttöliittymän päänäkymässä pelaajalle annetaan lista arvattavan sanan määritelmiä, ja pelaaja voi kirjoittaa arvauksensa tekstikenttään.
 
-Esimerkiksi ohjelman toiminta, kun käyttäjä klikkaa "New Word" nappia:
+Seuraava kaavio kuvaa ohjelman toimintaa, kun käyttäjä klikkaa "New Word" nappia:
 ```mermaid
     sequenceDiagram
-        User ->> ui: clicks "New Word" button
+        User ->> UI: clicks "New Word" button
         UI ->> GameService: new_item()
-        UI ->> GameService: get_readable_definitions()
         GameService ->> DictionaryService: get_random_item()
-        GameService ->> DictionaryService: get_word()
+        DictionaryService -->> GameService: item
+        UI ->> GameService: get_readable_definitions()
+        GameService ->> DictionaryService: get_definitions()
+        DictionaryService -->> GameService: definitions
         GameService -->> UI: definitions
+        
 ```

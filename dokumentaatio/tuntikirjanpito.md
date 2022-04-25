@@ -11,4 +11,5 @@
 | 12.4     | 3               | dokumentaatiota                                                                  |
 | 18.4     | 1               | Bugien korjausta ja UI:n parantelua, lisää testejä                               |
 | 22.4 | 1 | Lisätty nappi joka vaihtaa näkymää |
-| Yhteensä | 21              |
+| 25.4 | 2 | Lisätty ui:ta toiseen näkymään |
+| Yhteensä | | 23              |

@@ -16,7 +16,7 @@ class TestGame(unittest.TestCase):
         word = self.item.get_word()
         result = game_service.check_answer(word)
         self.assertEqual(result, True)
-        result = game_service.check_answer("asdasdasdasdasd")
+        result = game_service.check_answer("asdasd")
         self.assertEqual(result, False)
 
     def test_reveal_next_letter_decreases_points(self):
@@ -31,6 +31,6 @@ class TestGame(unittest.TestCase):
         self.assertEqual(game_service.get_points_to_gain(), 10)
 
     def test_points_to_gain_stays_positive(self):
-        for _ in range(20):
+        for _ in range(30):
             game_service.reveal_next_letter()
         self.assertGreaterEqual(game_service.get_points_to_gain(), 0)
