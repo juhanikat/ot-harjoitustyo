@@ -14,7 +14,7 @@ class GameService:
 
         self.new_item()
 
-    def new_item(self):
+    def new_item(self) -> Item:
         self.current_item = dictionary_service.get_random_item()
         word = self.current_item.get_word()
         self.places = list(range(len(word)))
@@ -53,7 +53,7 @@ class GameService:
                 return True
         return False
 
-    def get_readable_definitions(self):
+    def get_readable_definitions(self) -> list:
         """Returns a list of definitions for the current word."""
         if self.current_item:
             result = []

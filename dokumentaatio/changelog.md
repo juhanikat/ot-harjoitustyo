@@ -8,3 +8,8 @@
 
 - Lisätty osa graafisesta käyttöliittymästä
 - Lisätty pistelaskuri
+
+## Viikko 5
+
+- Pelaajat voivat lisätä omia sanojaan pelin muistiin (sanat eivät vielä näy pelissä)
+- Lisätty uusi näkymä ui:hin, jossa pelaaja voi lisätä sanoja

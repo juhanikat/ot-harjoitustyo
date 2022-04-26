@@ -1,3 +1,7 @@
 <root>
-    Todo 
+    <item>
+        <word>test word</word>
+        <defn>test definition 1</defn>
+        <defn>test definition 2</defn>
+    </item>
 </root>
