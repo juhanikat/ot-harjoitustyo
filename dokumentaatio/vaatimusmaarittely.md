@@ -16,4 +16,4 @@ Peli antaa pelaajalle satunnaisesti valitun sanan määritelmän, jonka avulla p
   - (Tehty) Peli voi paljastaa kirjaimia sanasta (esim. _ _ _ _ _ -> k _ s s a)
 - Peli voi kertoa, onko pelaajan arvaus lähellä oikeaa sanaa
 - Pelaaja voi valita sanojen aihepiirin
-- Pelaaja voi lisätä omia sanoja sanakirjaan
+- (Osittain tehty) Pelaaja voi lisätä omia sanoja sanakirjaan
