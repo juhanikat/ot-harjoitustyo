@@ -1,5 +1,5 @@
 import tkinter
-from tkinter import constants, ttk
+from tkinter import ttk
 
 from services.game_service import game_service
 from services.dictionary_service import dictionary_service
@@ -22,10 +22,12 @@ class AddWordsView:
         self.buttons_frame.destroy()
         self.textbox_frame.destroy()
 
-    def handle_add_word_button_click(self):
+    def handle_add_word_button(self):
         word = self.word_entry.get()
         definitions_as_string = self.definition_box.get("1.0", "end-1c")
         dictionary_service.add_to_player_dictionary(word, definitions_as_string)
+        self.word_entry.delete(0, "end")
+        self.definition_box.delete(1.0, "end")
 
     def initialize(self):
         self.buttons_frame = ttk.Frame(master=self.root)
@@ -33,17 +35,29 @@ class AddWordsView:
         self.add_word_button = ttk.Button(
             master=self.buttons_frame,
             text="Add Word",
-            command=lambda: self.handle_add_word_button_click(),
+            command=lambda: self.handle_add_word_button(),
         )
-        self.word_entry = ttk.Entry(master=self.textbox_frame)
+        self.word_entry = ttk.Entry(master=self.buttons_frame)
         self.definition_box = tkinter.Text(master=self.textbox_frame)
         change_view_button = ttk.Button(
-            master=self.buttons_frame, text="Change View", command=self.show_main_view
+            master=self.buttons_frame,
+            text="Back to Main View",
+            command=self.show_main_view,
         )
-        self.add_word_button.pack()
+
+        info_label = ttk.Label(
+            master=self.textbox_frame,
+            text="Type in a word and its definitions, each definition on its own line. (Does not work yet!)",
+        )
+
+        word_entry_text = ttk.Label(master=self.buttons_frame, text="Word: ")
+
+        change_view_button.grid(row=0, column=1)
+        word_entry_text.grid(row=1, column=0)
+        self.word_entry.grid(row=1, column=1)
+        self.add_word_button.grid(row=1, column=2)
+        info_label.pack()
         self.definition_box.pack()
-        self.word_entry.pack()
-        change_view_button.pack()
 
 
 class MainView:
@@ -70,7 +84,7 @@ class MainView:
         self.total_points_label.config(text=f"Points: {total_points}")
         self.points_to_gain_label.config(text=f"Points to gain: {points_to_gain}")
 
-    def handle_submit_button_click(self, answer: str):
+    def handle_submit_button(self, answer: str):
         result = game_service.check_answer(answer)
         if result is True:
             self.insert_to_textbox(f"Correct! The word was {answer}.")
@@ -81,11 +95,11 @@ class MainView:
             self.insert_to_textbox(f"Wrong, try again!")
         self.update()
 
-    def handle_new_word_button_click(self):
+    def handle_new_word_button(self):
         game_service.new_item()
         definitions = game_service.get_readable_definitions()
         self.clear_textbox()
-        self.answer_entry.delete(0, constants.END)
+        self.answer_entry.delete(0, "end")
         self.underscores_label.config(text=game_service.get_readable_underscores())
         self.insert_to_textbox(
             f"Guess the following {game_service.get_word_length()} letter word: "
@@ -96,19 +110,19 @@ class MainView:
         self.hint_button.config(state="normal")
         self.update()
 
-    def handle_hint_button_click(self):
+    def handle_hint_button(self):
         game_service.reveal_next_letter()
         self.underscores_label.config(text=game_service.get_readable_underscores())
         self.update()
 
     def clear_textbox(self):
         self.textbox.config(state="normal")
-        self.textbox.delete(1.0, constants.END)
+        self.textbox.delete(1.0, "end")
         self.textbox.config(state="disabled")
 
     def insert_to_textbox(self, line):
         self.textbox.config(state="normal")
-        self.textbox.insert(constants.END, line + "\n")
+        self.textbox.insert("end", line + "\n")
         self.textbox.config(state="disabled")
         self.textbox.see("end")
 
@@ -127,17 +141,17 @@ class MainView:
         new_word_button = ttk.Button(
             master=self.answer_frame,
             text="New Word",
-            command=lambda: self.handle_new_word_button_click(),
+            command=lambda: self.handle_new_word_button(),
         )
         self.hint_button = ttk.Button(
             master=self.answer_frame,
             text="Hint (-1)",
-            command=lambda: self.handle_hint_button_click(),
+            command=lambda: self.handle_hint_button(),
         )
         self.submit_button = ttk.Button(
             master=self.answer_frame,
             text="Submit",
-            command=lambda: self.handle_submit_button_click(self.answer_entry.get()),
+            command=lambda: self.handle_submit_button(self.answer_entry.get()),
         )
         change_view_button = ttk.Button(
             master=self.answer_frame,

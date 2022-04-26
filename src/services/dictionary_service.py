@@ -37,22 +37,24 @@ class DictionaryService:
 
     def get_player_dictionary(self):
         dict_path = os.path.join(source_path, "..", "..", "data/player_dictionary.xml")
-        if not os.path.isfile(dict_path):
-            print("No player_dictionary.xml found!")
-            sys.exit()
+        if not os.path.isfile(dict_path) or os.path.getsize(dict_path) == 0:
+            with open(dict_path, "w") as file:  # creates the file and adds root tag
+                file.write("<root>\n</root>")
         with open(dict_path, "r") as xml:
             tree = etree.parse(xml)
         return tree.getroot()
 
     def add_to_player_dictionary(self, word: str, definitions_as_string: str) -> None:
+        word, definitions_as_string = word.strip(), definitions_as_string.strip()
         if len(word) == 0 or len(definitions_as_string) == 0:
             print("No empty words")
             return
         self.player_dictionary = self.get_player_dictionary()
         definitions = definitions_as_string.split("\n")
-        definitions = [defn for defn in definitions if defn]  # removes empty lines
+        definitions = [
+            defn.strip() for defn in definitions if defn
+        ]  # removes empty lines
 
-        # TODO: add word and definitions into player_dictionary.xml
         item = etree.SubElement(self.player_dictionary, "item")
         word_tag = etree.SubElement(item, "word")
         word_tag.text = word
