@@ -1,4 +1,3 @@
-from nis import cat
 import tkinter
 from tkinter import ttk
 
@@ -48,7 +47,7 @@ class AddWordsView:
 
         info_label = ttk.Label(
             master=self.textbox_frame,
-            text="Type in a word and its definitions, each definition on its own line. (Does not work yet!)",
+            text="Enter your word and its definitions below. Each definition on its own line. \nThe entries are saved in data/player_dictionary.xml",
         )
 
         word_entry_text = ttk.Label(master=self.buttons_frame, text="Word: ")
@@ -101,7 +100,6 @@ class MainView:
         definitions = game_service.get_readable_definitions()
         self.clear_textbox()
         self.answer_entry.delete(0, "end")
-        self.underscores_label.config(text=game_service.get_readable_underscores())
         self.insert_to_textbox(
             f"Guess the following {game_service.get_word_length()} letter word: "
         )
@@ -113,7 +111,7 @@ class MainView:
 
     def handle_hint_button(self):
         game_service.reveal_next_letter()
-        self.underscores_label.config(text=game_service.get_readable_underscores())
+        self.insert_to_textbox(game_service.get_readable_underscores())
         self.update()
 
     def clear_textbox(self):
@@ -132,7 +130,6 @@ class MainView:
         self.definitions_frame = ttk.Frame(master=self.root)
         self.textbox = tkinter.Text(master=self.definitions_frame)
 
-        self.underscores_label = ttk.Label(master=self.answer_frame)
         answer_label = ttk.Label(master=self.answer_frame, text="The word is: ")
         self.total_points_label = ttk.Label(master=self.answer_frame, text="Points: 0")
         self.points_to_gain_label = ttk.Label(
@@ -161,24 +158,21 @@ class MainView:
         )
         change_view_button = ttk.Button(
             master=self.answer_frame,
-            text="Change View",
+            text="Add Custom Words",
             command=self.show_add_words_view,
         )
-
-        self.underscores_label.grid(row=2, column=0)
-        self.total_points_label.grid(row=2, column=1)
-        self.points_to_gain_label.grid(row=2, column=2)
-        answer_label.grid(row=0, column=0)
-        self.answer_entry.grid(row=0, column=1)
-        self.submit_button.grid(row=1, column=0)
-        new_word_button.grid(row=1, column=1)
-        new_custom_word_button.grid(row=1, column=2)
-        self.hint_button.grid(row=1, column=3)
-        change_view_button.grid(row=1, column=4)
+        self.submit_button.grid(row=0, column=0)
+        new_word_button.grid(row=0, column=1)
+        new_custom_word_button.grid(row=0, column=2)
+        self.hint_button.grid(row=0, column=3)
+        change_view_button.grid(row=0, column=4)
+        self.total_points_label.grid(row=1, column=0)
+        self.points_to_gain_label.grid(row=1, column=3)
+        answer_label.grid(row=2, column=0)
+        self.answer_entry.grid(row=2, column=1)
         self.textbox.pack(fill="both")
 
         definitions = game_service.get_readable_definitions()
-        self.underscores_label.config(text=game_service.get_readable_underscores())
         self.insert_to_textbox(
             f"Guess the following {game_service.get_word_length()} letter word: "
         )

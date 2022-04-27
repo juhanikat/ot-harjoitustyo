@@ -1,12 +1,12 @@
 import unittest
 
-from services.dictionary_service import dictionary_service
+from services.dictionary_service import dictionary_service, InvalidCategoryError
 from services.game_service import game_service
 
 
 class TestGame(unittest.TestCase):
     def setUp(self):
-        self.item = game_service.new_item()
+        self.item = game_service.new_item(category="main")
 
     def test_get_readable_word_returns_string(self):
         word = self.item.get_word()
@@ -27,10 +27,17 @@ class TestGame(unittest.TestCase):
     def test_new_item_resets_points_to_gain(self):
         game_service.reveal_next_letter()
         self.assertEqual(game_service.get_points_to_gain(), 9)
-        game_service.new_item()
+        game_service.new_item(category="main")
         self.assertEqual(game_service.get_points_to_gain(), 10)
 
     def test_points_to_gain_stays_positive(self):
         for _ in range(30):
             game_service.reveal_next_letter()
         self.assertGreaterEqual(game_service.get_points_to_gain(), 0)
+
+    def test_getting_new_item_from_different_categories(self):
+        game_service.new_item(category="main")
+        game_service.new_item(category="custom")
+        self.assertRaises(
+            InvalidCategoryError, game_service.new_item, category="asdasd"
+        )

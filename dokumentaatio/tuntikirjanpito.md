@@ -13,4 +13,5 @@
 | 22.4     | 1               | Lisätty nappi joka vaihtaa näkymää                                               |
 | 25.4     | 2               | Lisätty ui:ta toiseen näkymään                                                   |
 | 26.4     | 1               | Lisätty pelaajan omien sanojen lisäys -toiminnallisuus                           |
-| Yhteensä |                 | 23                                                                               |
+| 27.4     | 2               | Paranneltu omien sanojen lisäystoiminnallisuutta ja päivitetty käyttöliittymää   |
+| Yhteensä |                 | 25                                                                               |

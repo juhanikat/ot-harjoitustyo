@@ -7,6 +7,10 @@ from lxml import etree
 source_path = os.path.dirname(__file__)
 
 
+class InvalidCategoryError(Exception):
+    pass
+
+
 class Item:
     def __init__(self, string):
         self.word = string[0].text.strip()
@@ -66,20 +70,14 @@ class DictionaryService:
         tree = etree.ElementTree(self.player_dictionary)
         tree.write(dict_path, pretty_print=True)
 
-    def get_random_item(self, *, category, excluded: list = []) -> Item:
+    def get_random_item(self, *, category) -> Item:
         if category == "custom":
             dictio = self.get_player_dictionary_root()
         elif category == "main":
             dictio = self.dictionary
         else:
-            print("Invalid category name!")
-            sys.exit()
-        if len(excluded) == len(dictio):
-            return False
-        while True:
-            item = Item(dictio[random.randint(0, len(dictio) - 1)])
-            if item not in excluded:
-                break
+            raise InvalidCategoryError("Invalid category name!")
+        item = Item(dictio[random.randint(0, len(dictio) - 1)])
         return item
 
 

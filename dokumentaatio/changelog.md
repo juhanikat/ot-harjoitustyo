@@ -13,3 +13,7 @@
 
 - Pelaajat voivat lisätä omia sanojaan pelin muistiin (sanat eivät vielä näy pelissä)
 - Lisätty uusi näkymä ui:hin, jossa pelaaja voi lisätä sanoja
+
+## Viikko 6
+
+- Pelaajan lisäämät sanat näkyvät pelissä
