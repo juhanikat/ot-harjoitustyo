@@ -95,8 +95,8 @@ class MainView:
             self.insert_to_textbox(f"Wrong, try again!")
         self.update()
 
-    def handle_new_word_button(self):
-        game_service.new_item()
+    def handle_new_word_button(self, *, category):
+        game_service.new_item(category=category)
         definitions = game_service.get_readable_definitions()
         self.clear_textbox()
         self.answer_entry.delete(0, "end")
@@ -141,7 +141,12 @@ class MainView:
         new_word_button = ttk.Button(
             master=self.answer_frame,
             text="New Word",
-            command=lambda: self.handle_new_word_button(),
+            command=lambda: self.handle_new_word_button(category="main"),
+        )
+        new_custom_word_button = ttk.Button(
+            master=self.answer_frame,
+            text="New Custom Word",
+            command=lambda: self.handle_new_word_button(category="custom"),
         )
         self.hint_button = ttk.Button(
             master=self.answer_frame,
@@ -166,8 +171,9 @@ class MainView:
         self.answer_entry.grid(row=0, column=1)
         self.submit_button.grid(row=1, column=0)
         new_word_button.grid(row=1, column=1)
-        self.hint_button.grid(row=1, column=2)
-        change_view_button.grid(row=1, column=3)
+        new_custom_word_button.grid(row=1, column=2)
+        self.hint_button.grid(row=1, column=3)
+        change_view_button.grid(row=1, column=4)
         self.textbox.pack(fill="both")
 
         definitions = game_service.get_readable_definitions()

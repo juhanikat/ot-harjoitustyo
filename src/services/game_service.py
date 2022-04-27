@@ -12,10 +12,10 @@ class GameService:
         self.underscores = None
         self.places = None
 
-        self.new_item()
+        self.new_item(category="main")
 
-    def new_item(self) -> Item:
-        self.current_item = dictionary_service.get_random_item()
+    def new_item(self, *, category) -> Item:
+        self.current_item = dictionary_service.get_random_item(category=category)
         word = self.current_item.get_word()
         self.places = list(range(len(word)))
         random.shuffle(self.places)

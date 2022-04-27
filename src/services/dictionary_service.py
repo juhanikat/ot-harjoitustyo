@@ -23,10 +23,10 @@ class Item:
 
 class DictionaryService:
     def __init__(self):
-        self.dictionary = self.get_dictionary()
-        self.player_dictionary = self.get_player_dictionary()
+        self.dictionary = self.get_dictionary_root()
+        self.player_dictionary = self.get_player_dictionary_root()
 
-    def get_dictionary(self):
+    def get_dictionary_root(self):
         dict_path = os.path.join(source_path, "..", "..", "data/dictionary.xml")
         if not os.path.isfile(dict_path):
             print("No dictionary.xml found!")
@@ -35,7 +35,7 @@ class DictionaryService:
             tree = etree.parse(xml)
         return tree.getroot()
 
-    def get_player_dictionary(self):
+    def get_player_dictionary_root(self):
         dict_path = os.path.join(source_path, "..", "..", "data/player_dictionary.xml")
         if not os.path.isfile(dict_path) or os.path.getsize(dict_path) == 0:
             with open(dict_path, "w") as file:  # creates the file and adds root tag
@@ -49,7 +49,7 @@ class DictionaryService:
         if len(word) == 0 or len(definitions_as_string) == 0:
             print("No empty words")
             return
-        self.player_dictionary = self.get_player_dictionary()
+        self.player_dictionary = self.get_player_dictionary_root()
         definitions = definitions_as_string.split("\n")
         definitions = [
             defn.strip() for defn in definitions if defn
@@ -66,11 +66,18 @@ class DictionaryService:
         tree = etree.ElementTree(self.player_dictionary)
         tree.write(dict_path, pretty_print=True)
 
-    def get_random_item(self, excluded: list = []) -> Item:
-        if len(excluded) == len(self.dictionary):
+    def get_random_item(self, *, category, excluded: list = []) -> Item:
+        if category == "custom":
+            dictio = self.get_player_dictionary_root()
+        elif category == "main":
+            dictio = self.dictionary
+        else:
+            print("Invalid category name!")
+            sys.exit()
+        if len(excluded) == len(dictio):
             return False
         while True:
-            item = Item(self.dictionary[random.randint(0, len(self.dictionary) - 1)])
+            item = Item(dictio[random.randint(0, len(dictio) - 1)])
             if item not in excluded:
                 break
         return item
