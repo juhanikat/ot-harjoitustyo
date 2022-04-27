@@ -3,5 +3,4 @@ __pycache__
 .venv
 .coverage
 htmlcov
-
-data/player_dictionary.xml
+player_dictionary.xml
