@@ -1,3 +1,5 @@
+# Arkkitehtuuri
+
 ## Rakenne
 
 Ohjelman kaikki koodi sijaitsee src-kansiossa. src-kansion sisällä olevat pakkaukset services ja ui sisältävät koodin, joka vastaa sovelluslogiikasta ja käyttöliittymästä.
@@ -12,7 +14,7 @@ Käyttöliittymässä on kaksi näkymää. Ensimmäisenä avautuvassa näkymäss
 
 Ohjelma voi tallentaa käyttäjän lisäämiä sanoja. Pelaajan lisäämät sanat tallennetaan kansiossa data sijaitsevaan player_dictionary.xml -tiedostoon. Muita tietoja, kuten pistemääriä, ohjelma ei tallenna.
 
-
+## Kaavioita
 
 Luokka UI on riippuvainen luokasta GameService, joka taas on riippuvainen luokista DictionaryService ja Item. DictionaryService lukee sanoja "dictionary.xml" nimisestä xml-tiedostosta.
 
