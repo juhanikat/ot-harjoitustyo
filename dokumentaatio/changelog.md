@@ -17,3 +17,4 @@
 ## Viikko 6
 
 - Pelaajan lisäämät sanat näkyvät pelissä
+- Lisää testejä
