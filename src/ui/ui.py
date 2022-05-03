@@ -1,11 +1,13 @@
 import tkinter
 from tkinter import ttk
 
+from services.dictionary_service import EmptyItemError, dictionary_service
 from services.game_service import game_service
-from services.dictionary_service import dictionary_service
 
 
 class AddWordsView:
+    """The view where the player can add custom words to the dictionary."""
+
     def __init__(self, root, show_main_view):
         self.root = root
         self.buttons_frame = None
@@ -25,7 +27,10 @@ class AddWordsView:
     def handle_add_word_button(self):
         word = self.word_entry.get()
         definitions_as_string = self.definition_box.get("1.0", "end-1c")
-        dictionary_service.add_to_player_dictionary(word, definitions_as_string)
+        try:
+            dictionary_service.add_to_player_dictionary(word, definitions_as_string)
+        except EmptyItemError as error:
+            print(error)
         self.word_entry.delete(0, "end")
         self.definition_box.delete(1.0, "end")
 
@@ -61,24 +66,26 @@ class AddWordsView:
 
 
 class MainView:
+    """The main view where the player can guess words. Opened when the program first starts."""
+
     def __init__(self, root, show_add_words_view) -> None:
         self.root = root
         self.show_add_words_view = show_add_words_view
         self.answer_frame = None
-        self.definitions_frame = None
+        self.textbox_frame = None
         self.textbox = None
 
         self.initialize()
 
     def destroy(self):
         self.answer_frame.destroy()
-        self.definitions_frame.destroy()
+        self.textbox_frame.destroy()
 
     def pack(self):
         self.answer_frame.pack()
-        self.definitions_frame.pack(fill="both")
+        self.textbox_frame.pack(fill="both")
 
-    def update(self):
+    def update_points(self):
         total_points = game_service.get_total_points()
         points_to_gain = game_service.get_points_to_gain()
         self.total_points_label.config(text=f"Points: {total_points}")
@@ -93,7 +100,7 @@ class MainView:
             self.hint_button.config(state="disabled")
         else:
             self.insert_to_textbox(f"Wrong, try again!")
-        self.update()
+        self.update_points()
 
     def handle_new_word_button(self, *, category):
         game_service.new_item(category=category)
@@ -105,14 +112,17 @@ class MainView:
         )
         for defn in definitions:
             self.insert_to_textbox(defn)
+        self.insert_to_textbox(
+            "You can press the hint button to get hints, but it will decrease the amount of points you gain."
+        )
         self.submit_button.config(state="normal")
         self.hint_button.config(state="normal")
-        self.update()
+        self.update_points()
 
     def handle_hint_button(self):
         game_service.reveal_next_letter()
-        self.insert_to_textbox(game_service.get_readable_underscores())
-        self.update()
+        self.insert_to_textbox(f"Hint: {game_service.get_readable_underscores()}")
+        self.update_points()
 
     def clear_textbox(self):
         self.textbox.config(state="normal")
@@ -127,8 +137,8 @@ class MainView:
 
     def initialize(self):
         self.answer_frame = ttk.Frame(master=self.root)
-        self.definitions_frame = ttk.Frame(master=self.root)
-        self.textbox = tkinter.Text(master=self.definitions_frame)
+        self.textbox_frame = ttk.Frame(master=self.root)
+        self.textbox = tkinter.Text(master=self.textbox_frame)
 
         answer_label = ttk.Label(master=self.answer_frame, text="The word is: ")
         self.total_points_label = ttk.Label(master=self.answer_frame, text="Points: 0")
@@ -178,7 +188,10 @@ class MainView:
         )
         for defn in definitions:
             self.insert_to_textbox(defn)
-        self.update()
+        self.insert_to_textbox(
+            "You can press the hint button to get hints, but it will decrease the amount of points you gain."
+        )
+        self.update_points()
 
 
 class UI:

@@ -1,9 +1,22 @@
 import random
 
-from services.dictionary_service import Item, dictionary_service
+from entities.item import Item
+
+from services.dictionary_service import dictionary_service
 
 
 class GameService:
+    """Handles the game mechanics.
+
+    Attributes:
+        total_points: The amount of points gained so far.
+        points_to_gain: The amount of points that can be gained from guessing the current word.
+        attempts: The amount of attempts the player has made so far.
+        current_item: The current word and its definitions.
+        underscores: A list of underscores that can be replaced with letters from the current word.
+
+    """
+
     def __init__(self) -> None:
         self.total_points = 0
         self.points_to_gain = 0
@@ -15,6 +28,14 @@ class GameService:
         self.new_item(category="main")
 
     def new_item(self, *, category) -> Item:
+        """Chooses a new word and resets hints and points to gain.
+
+        Args:
+            category: Determines if the new word is a custom word ("custom"), or a default one ("main").
+
+        Returns:
+            Item: The new word and its definitions.
+        """
         self.current_item = dictionary_service.get_random_item(category=category)
         word = self.current_item.get_word()
         self.places = list(range(len(word)))
@@ -32,21 +53,25 @@ class GameService:
                 self.points_to_gain -= 1
 
     def get_readable_underscores(self):
+        """Returns underscores as a string."""
         return " ".join(self.underscores)
 
     def get_word_length(self):
+        """Returns the length of the current word if it exists, and False otherwise."""
         if self.current_item:
             return len(self.current_item.get_word())
         return False
 
     def get_total_points(self):
+        """Returns total points."""
         return self.total_points
 
     def get_points_to_gain(self):
+        """Returns points that can be gained from guessing the current word."""
         return self.points_to_gain
 
     def check_answer(self, answer):
-        """Returns True and adds points if the answer was correct, and returns False otherwise."""
+        """Returns True and adds points if the answer was correct, and False otherwise."""
         if self.current_item:
             if answer.strip() == self.current_item.get_word():
                 self.total_points += self.points_to_gain

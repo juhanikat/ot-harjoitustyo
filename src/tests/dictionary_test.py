@@ -1,6 +1,10 @@
 import unittest
 
-from services.dictionary_service import dictionary_service, InvalidCategoryError
+from services.dictionary_service import (
+    dictionary_service,
+    InvalidCategoryError,
+    EmptyItemError,
+)
 from services.game_service import game_service
 
 
@@ -40,4 +44,18 @@ class TestGame(unittest.TestCase):
         game_service.new_item(category="custom")
         self.assertRaises(
             InvalidCategoryError, game_service.new_item, category="asdasd"
+        )
+
+    def test_add_empty_item_to_player_dictionary(self):
+        self.assertRaises(
+            EmptyItemError, dictionary_service.add_to_player_dictionary, "", ""
+        )
+        self.assertRaises(
+            EmptyItemError, dictionary_service.add_to_player_dictionary, " ", " "
+        )
+        self.assertRaises(
+            EmptyItemError, dictionary_service.add_to_player_dictionary, "", "asdasd"
+        )
+        self.assertRaises(
+            EmptyItemError, dictionary_service.add_to_player_dictionary, "asdasd", ""
         )

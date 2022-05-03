@@ -2,6 +2,7 @@ import os
 import random
 import sys
 
+from entities.item import Item
 from lxml import etree
 
 source_path = os.path.dirname(__file__)
@@ -11,35 +12,49 @@ class InvalidCategoryError(Exception):
     pass
 
 
-class Item:
-    def __init__(self, string):
-        self.word = string[0].text.strip()
-        self.definitions = []
-        for defn in string[1:]:
-            self.definitions.append(defn.text.strip())
+class EmptyItemError(Exception):
+    pass
 
-    def get_word(self) -> list:
-        return self.word
 
-    def get_definitions(self) -> list:
-        return self.definitions
+class NoDictError(Exception):
+    pass
 
 
 class DictionaryService:
+    """Handles getting data and adding data to and from the xml files.
+
+    Attributes:
+        dictionary: The root element of dictionary.xml.
+        player_dictionary: the root element of player_dictionary.xml.
+    """
+
     def __init__(self):
-        self.dictionary = self.get_dictionary_root()
+        try:
+            self.dictionary = self.get_dictionary_root()
+        except NoDictError as error:
+            print(error)
+            sys.exit()
         self.player_dictionary = self.get_player_dictionary_root()
 
     def get_dictionary_root(self):
+        """_summary_
+
+        Returns:
+            The root element of the dictionary.xml file.
+        """
         dict_path = os.path.join(source_path, "..", "..", "data/dictionary.xml")
         if not os.path.isfile(dict_path):
-            print("No dictionary.xml found!")
-            sys.exit()
+            raise NoDictError("No dictionary.xml found!")
         with open(dict_path, "r") as xml:
             tree = etree.parse(xml)
         return tree.getroot()
 
     def get_player_dictionary_root(self):
+        """_summary_
+
+        Returns:
+            The root element of the player_dictionary.xml file.
+        """
         dict_path = os.path.join(source_path, "..", "..", "data/player_dictionary.xml")
         if not os.path.isfile(dict_path) or os.path.getsize(dict_path) == 0:
             with open(dict_path, "w") as file:  # creates the file and adds root tag
@@ -49,10 +64,15 @@ class DictionaryService:
         return tree.getroot()
 
     def add_to_player_dictionary(self, word: str, definitions_as_string: str) -> None:
+        """Adds a custom word and its definitions as an element into the player_dictionary.xml file.
+
+        Args:
+            word (str): The custom word.
+            definitions_as_string (str): The custom word's definitions.
+        """
         word, definitions_as_string = word.strip(), definitions_as_string.strip()
         if len(word) == 0 or len(definitions_as_string) == 0:
-            print("No empty words")
-            return
+            raise EmptyItemError("The word or its definitions can not be empty.")
         self.player_dictionary = self.get_player_dictionary_root()
         definitions = definitions_as_string.split("\n")
         definitions = [
@@ -71,6 +91,17 @@ class DictionaryService:
         tree.write(dict_path, pretty_print=True)
 
     def get_random_item(self, *, category) -> Item:
+        """Return a random item from dictionary.xml or player_dictionary.xml.
+
+        Args:
+            category (_type_): If "main", the item is selected from dictionary.xml. If "custom", the item is selected from player_dictionary.xml.
+
+        Raises:
+            InvalidCategoryError: Raised if category is not "main" nor "custom".
+
+        Returns:
+            Item: A random <item> element from dictionary.xml or player_dictionary.xml.
+        """
         if category == "custom":
             dictio = self.get_player_dictionary_root()
         elif category == "main":

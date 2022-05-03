@@ -14,4 +14,5 @@
 | 25.4     | 2               | Lisätty ui:ta toiseen näkymään                                                   |
 | 26.4     | 1               | Lisätty pelaajan omien sanojen lisäys -toiminnallisuus                           |
 | 27.4     | 2               | Paranneltu omien sanojen lisäystoiminnallisuutta ja päivitetty käyttöliittymää   |
-| Yhteensä |                 | 25                                                                               |
+| 3.5      | 3               | Muokattu projektin arkkitehtuuria, lisätty dokumentaatiota ja docstringejä       |
+| Yhteensä |                 | 28                                                                               |
