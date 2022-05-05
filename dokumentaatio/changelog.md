@@ -18,3 +18,6 @@
 
 - Pelaajan lisäämät sanat näkyvät pelissä
 - Lisää testejä
+
+## Viikko 7
+
