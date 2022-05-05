@@ -107,7 +107,12 @@ class MainView:
         self.update_labels()
 
     def handle_new_word_button(self, *, category):
-        game_service.new_item(category=category)
+        item = game_service.new_item(category=category)
+        if not item:
+            self.insert_to_textbox(
+                "Could not get item, your player_dictionary.xml file might be empty!"
+            )
+            return
         definitions = game_service.get_readable_definitions()
         self.clear_textbox()
         self.answer_entry.delete(0, "end")

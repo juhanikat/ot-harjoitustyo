@@ -37,6 +37,8 @@ class GameService:
             Item: The new word and its definitions.
         """
         self.current_item = dictionary_service.get_random_item(category=category)
+        if not self.current_item:
+            return False
         word = self.current_item.get_word()
         self.places = list(range(len(word)))
         random.shuffle(self.places)
