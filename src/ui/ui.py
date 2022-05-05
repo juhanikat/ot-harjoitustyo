@@ -85,13 +85,17 @@ class MainView:
         self.answer_frame.pack()
         self.textbox_frame.pack(fill="both")
 
-    def update_points(self):
+    def update_labels(self):
+        self.attempts_label.config(text=f"Attempts: {game_service.get_attempts()}")
         total_points = game_service.get_total_points()
         points_to_gain = game_service.get_points_to_gain()
         self.total_points_label.config(text=f"Points: {total_points}")
         self.points_to_gain_label.config(text=f"Points to gain: {points_to_gain}")
 
     def handle_submit_button(self, answer: str):
+        state = self.submit_button["state"]
+        if str(state) == "disabled":
+            return
         result = game_service.check_answer(answer)
         if result is True:
             self.insert_to_textbox(f"Correct! The word was {answer}.")
@@ -99,8 +103,8 @@ class MainView:
             self.submit_button.config(state="disabled")
             self.hint_button.config(state="disabled")
         else:
-            self.insert_to_textbox(f"Wrong, try again!")
-        self.update_points()
+            self.insert_to_textbox(f"Wrong, try again! (-1 points)")
+        self.update_labels()
 
     def handle_new_word_button(self, *, category):
         game_service.new_item(category=category)
@@ -117,12 +121,12 @@ class MainView:
         )
         self.submit_button.config(state="normal")
         self.hint_button.config(state="normal")
-        self.update_points()
+        self.update_labels()
 
     def handle_hint_button(self):
         game_service.reveal_next_letter()
         self.insert_to_textbox(f"Hint: {game_service.get_readable_underscores()}")
-        self.update_points()
+        self.update_labels()
 
     def clear_textbox(self):
         self.textbox.config(state="normal")
@@ -137,6 +141,10 @@ class MainView:
 
     def initialize(self):
         self.answer_frame = ttk.Frame(master=self.root)
+        self.answer_frame.bind()
+        self.root.bind(
+            "<Return>", lambda x: self.handle_submit_button(self.answer_entry.get())
+        )
         self.textbox_frame = ttk.Frame(master=self.root)
         self.textbox = tkinter.Text(master=self.textbox_frame)
 
@@ -171,12 +179,15 @@ class MainView:
             text="Add Custom Words",
             command=self.show_add_words_view,
         )
+
+        self.attempts_label = ttk.Label(master=self.answer_frame)
         self.submit_button.grid(row=0, column=0)
         new_word_button.grid(row=0, column=1)
         new_custom_word_button.grid(row=0, column=2)
         self.hint_button.grid(row=0, column=3)
         change_view_button.grid(row=0, column=4)
         self.total_points_label.grid(row=1, column=0)
+        self.attempts_label.grid(row=1, column=1)
         self.points_to_gain_label.grid(row=1, column=3)
         answer_label.grid(row=2, column=0)
         self.answer_entry.grid(row=2, column=1)
@@ -191,7 +202,7 @@ class MainView:
         self.insert_to_textbox(
             "You can press the hint button to get hints, but it will decrease the amount of points you gain."
         )
-        self.update_points()
+        self.update_labels()
 
 
 class UI:

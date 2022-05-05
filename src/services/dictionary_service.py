@@ -21,7 +21,7 @@ class NoDictError(Exception):
 
 
 class DictionaryService:
-    """Handles getting data and adding data to and from the xml files.
+    """Handles getting data from the xml files and adding data to player_dictionay.xml.
 
     Attributes:
         dictionary: The root element of dictionary.xml.
@@ -37,8 +37,7 @@ class DictionaryService:
         self.player_dictionary = self.get_player_dictionary_root()
 
     def get_dictionary_root(self):
-        """_summary_
-
+        """
         Returns:
             The root element of the dictionary.xml file.
         """
@@ -50,8 +49,7 @@ class DictionaryService:
         return tree.getroot()
 
     def get_player_dictionary_root(self):
-        """_summary_
-
+        """
         Returns:
             The root element of the player_dictionary.xml file.
         """
@@ -94,7 +92,7 @@ class DictionaryService:
         """Return a random item from dictionary.xml or player_dictionary.xml.
 
         Args:
-            category (_type_): If "main", the item is selected from dictionary.xml. If "custom", the item is selected from player_dictionary.xml.
+            category: If "main", the item is selected from dictionary.xml. If "custom", the item is selected from player_dictionary.xml.
 
         Raises:
             InvalidCategoryError: Raised if category is not "main" nor "custom".

@@ -5,7 +5,7 @@ Peli antaa pelaajalle satunnaisesti valitun sanan määritelmän, jonka avulla p
 ## Perustoiminnallisuus
 
 - (Tehty) Sanat ja niiden määritelmät valitaan satunnaisesti projektin sisältämästä xml-tiedostosta
-- Peli pitää kirjaa pelaajan arvauksien määrästä
+- (Tehty) Peli pitää kirjaa pelaajan arvauksien määrästä
 - (Tehty) Pelaaja saa pisteitä onnistuneen arvauksen jälkeen
 
 ## Jatkokehitysideat
