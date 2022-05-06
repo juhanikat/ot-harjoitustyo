@@ -16,4 +16,5 @@
 | 27.4     | 2               | Paranneltu omien sanojen lisäystoiminnallisuutta ja päivitetty käyttöliittymää      |
 | 3.5      | 3               | Muokattu projektin arkkitehtuuria, lisätty dokumentaatiota ja docstringejä          |
 | 5.5      | 2               | Päivitetty dokumentaatiota ja lisätty napin painaminen Enter-painiketta käyttämällä |
-| Yhteensä |                 | 30                                                                                  |
+| 6.5      | 2               | Korjattu bugeja                                                                     |
+| Yhteensä |                 | 32                                                                                  |

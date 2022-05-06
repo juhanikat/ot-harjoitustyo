@@ -36,9 +36,10 @@ class GameService:
         Returns:
             Item: The new word and its definitions.
         """
-        self.current_item = dictionary_service.get_random_item(category=category)
-        if not self.current_item:
+        new_item = dictionary_service.get_random_item(category=category)
+        if not new_item:
             return False
+        self.current_item = new_item
         word = self.current_item.get_word()
         self.places = list(range(len(word)))
         random.shuffle(self.places)
@@ -89,8 +90,7 @@ class GameService:
             if answer.strip() == self.current_item.get_word():
                 self.total_points += self.points_to_gain
                 return True
-            else:
-                self.decrease_points_to_gain(1)
+            self.decrease_points_to_gain(1)
         return False
 
     def get_readable_definitions(self) -> list:

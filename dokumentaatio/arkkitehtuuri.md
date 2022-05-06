@@ -2,13 +2,11 @@
 
 ## Rakenne
 
-Ohjelman kaikki koodi sijaitsee src-kansiossa. src-kansion sisällä olevat pakkaukset services ja ui sisältävät koodin, joka vastaa sovelluslogiikasta ja käyttöliittymästä.
-
+Ohjelman kaikki koodi sijaitsee src-kansiossa. src-kansion sisällä oleva pakkaus services vastaa sovelluslogiikasta ja ui-pakkaus vastaa käyttöliittymästä.
 
 ## Käyttöliittymä
 
-Käyttöliittymässä on kaksi näkymää. Ensimmäisenä avautuvassa näkymässä pelaaja voi pelata peliä. Painamalla nappia pääsee näkymään, jossa pelaaja voi lisätä omia sanojaan ohjelman muistiin. 
-
+Käyttöliittymässä on kaksi näkymää. Ensimmäisenä avautuvassa näkymässä pelaaja voi pelata peliä. Painamalla nappia pääsee toiseen näkymään, jossa pelaaja voi lisätä omia sanojaan ohjelman muistiin.
 
 ## Tietojen tallennus
 
@@ -32,6 +30,7 @@ Luokka UI on riippuvainen luokasta GameService, joka taas on riippuvainen luokis
         }
         class DictionaryService{
             dictionary
+            player_dictionary
         }
         class Item{
 

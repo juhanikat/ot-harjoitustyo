@@ -32,8 +32,3 @@ ja testikattavuusraportti luodaan komennolla:
 ```
 poetry run invoke coverage-report
 ```
-
-
-## Known Issues
-
-Jos painaa "New Custom Word" nappia silloin kun player_dictionary.xml:lään ei ole lisätty sanoja, ohjelma ei toimi oikein.

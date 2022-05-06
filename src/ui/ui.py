@@ -158,6 +158,8 @@ class MainView:
         self.points_to_gain_label = ttk.Label(
             master=self.answer_frame, text="Points to gain: 0"
         )
+        self.attempts_label = ttk.Label(master=self.answer_frame)
+
         self.answer_entry = ttk.Entry(master=self.answer_frame)
         new_word_button = ttk.Button(
             master=self.answer_frame,
@@ -185,15 +187,16 @@ class MainView:
             command=self.show_add_words_view,
         )
 
-        self.attempts_label = ttk.Label(master=self.answer_frame)
         self.submit_button.grid(row=0, column=0)
         new_word_button.grid(row=0, column=1)
         new_custom_word_button.grid(row=0, column=2)
         self.hint_button.grid(row=0, column=3)
         change_view_button.grid(row=0, column=4)
+
         self.total_points_label.grid(row=1, column=0)
         self.attempts_label.grid(row=1, column=1)
         self.points_to_gain_label.grid(row=1, column=3)
+
         answer_label.grid(row=2, column=0)
         self.answer_entry.grid(row=2, column=1)
         self.textbox.pack(fill="both")

@@ -35,7 +35,6 @@ class DictionaryService:
             print(error)
             sys.exit()
         self.player_dictionary = self.get_player_dictionary_root()
-        self.player_dict_is_empty = False
 
     def get_dictionary_root(self):
         """
@@ -45,7 +44,7 @@ class DictionaryService:
         dict_path = os.path.join(source_path, "..", "..", "data/dictionary.xml")
         if not os.path.isfile(dict_path):
             raise NoDictError("No dictionary.xml found!")
-        with open(dict_path, "r") as xml:
+        with open(dict_path, "r", encoding="UTF-8") as xml:
             tree = etree.parse(xml)
         return tree.getroot()
 
@@ -56,13 +55,12 @@ class DictionaryService:
         """
         dict_path = os.path.join(source_path, "..", "..", "data/player_dictionary.xml")
         if not os.path.isfile(dict_path) or os.path.getsize(dict_path) == 0:
-            self.player_dict_is_empty = True
-            with open(dict_path, "w") as file:  # creates the file and adds root tag
-                file.write(
-                    "<root><item><word>placeholder</word><defn>you don't have any custom words, add some using the 'Add Custom Words' button.</defn></item></root>"
-                )
+            with open(
+                dict_path, "w", encoding="UTF-8"
+            ) as file:  # creates the file and adds root tag
+                file.write("<root></root>")
             return False
-        with open(dict_path, "r") as xml:
+        with open(dict_path, "r", encoding="UTF-8") as xml:
             tree = etree.parse(xml)
         return tree.getroot()
 
@@ -71,12 +69,11 @@ class DictionaryService:
 
         Args:
             word (str): The custom word.
-            definitions_as_string (str): The custom word's definitions.
+            definitions_as_string (str): The custom word's definitions (each definition is separated by a newline).
         """
         word, definitions_as_string = word.strip(), definitions_as_string.strip()
         if len(word) == 0 or len(definitions_as_string) == 0:
             raise EmptyItemError("The word or its definitions can not be empty.")
-        self.player_dict_is_empty = False
         self.player_dictionary = self.get_player_dictionary_root()
         definitions = definitions_as_string.split("\n")
         definitions = [
@@ -107,9 +104,11 @@ class DictionaryService:
             Item: A random <item> element from dictionary.xml or player_dictionary.xml.
         """
         if category == "custom":
-            if self.player_dict_is_empty:
-                return False
+
             dictio = self.get_player_dictionary_root()
+            print(len(dictio))
+            if len(dictio) == 0:
+                return False
         elif category == "main":
             dictio = self.dictionary
         else:
