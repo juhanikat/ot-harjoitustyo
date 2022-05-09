@@ -11,8 +11,8 @@ Peli antaa pelaajalle satunnaisesti valitun sanan määritelmän, jonka avulla p
 ## Jatkokehitysideat
 
 - Tietokanta, joka pitää kirjaa pelin pelaajien pisteistä
-- (Osittain tehty) Peli voi antaa vihjeitä pelaajalle
-  - (Osittain tehty) Vihjeiden käyttäminen alentaa sanan arvaamisesta saatua pistemäärää
+- (Tehty) Peli voi antaa vihjeitä pelaajalle
+  - (Tehty) Vihjeiden käyttäminen alentaa sanan arvaamisesta saatua pistemäärää
   - (Tehty) Peli voi paljastaa kirjaimia sanasta (esim. _ _ _ _ _ -> k _ s s a)
 - Peli voi kertoa, onko pelaajan arvaus lähellä oikeaa sanaa
 - Pelaaja voi valita sanojen aihepiirin

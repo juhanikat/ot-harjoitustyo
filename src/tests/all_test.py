@@ -1,4 +1,6 @@
 import unittest
+import os
+from pathlib import Path
 
 from services.dictionary_service import (
     dictionary_service,
@@ -7,10 +9,17 @@ from services.dictionary_service import (
 )
 from services.game_service import game_service
 
+root_dir = Path(__file__).parents[2]
+
 
 class TestGame(unittest.TestCase):
     def setUp(self):
         self.item = game_service.new_item(category="main")
+
+    def test_starting_program_creates_player_dictionary_file(self):
+        self.assertTrue(
+            os.path.isfile(os.path.join(root_dir, "data/player_dictionary.xml"))
+        )
 
     def test_get_readable_word_returns_string(self):
         word = self.item.get_word()

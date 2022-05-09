@@ -37,9 +37,11 @@ class DictionaryService:
         self.player_dictionary = self.get_player_dictionary_root()
 
     def get_dictionary_root(self):
-        """
+        """Raises:
+           NoDictError: Raised if dictionary.xml doesn't exist.
+
         Returns:
-            The root element of the dictionary.xml file.
+           The root element of the dictionary.xml file.
         """
         dict_path = os.path.join(source_path, "..", "..", "data/dictionary.xml")
         if not os.path.isfile(dict_path):
@@ -51,7 +53,7 @@ class DictionaryService:
     def get_player_dictionary_root(self):
         """
         Returns:
-            The root element of the player_dictionary.xml file.
+            The root element of the player_dictionary.xml file, or if file doesn't exist, creates it and returns False.
         """
         dict_path = os.path.join(source_path, "..", "..", "data/player_dictionary.xml")
         if not os.path.isfile(dict_path) or os.path.getsize(dict_path) == 0:
