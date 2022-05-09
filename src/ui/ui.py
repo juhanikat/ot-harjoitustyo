@@ -1,4 +1,4 @@
-import tkinter
+import tkinter as tk
 from tkinter import ttk
 
 from services.dictionary_service import EmptyItemError, dictionary_service
@@ -40,10 +40,10 @@ class AddWordsView:
         self.add_word_button = ttk.Button(
             master=self.buttons_frame,
             text="Add Word",
-            command=lambda: self.handle_add_word_button(),
+            command=self.handle_add_word_button,
         )
         self.word_entry = ttk.Entry(master=self.buttons_frame)
-        self.definition_box = tkinter.Text(master=self.textbox_frame)
+        self.definition_box = tk.Text(master=self.textbox_frame)
         change_view_button = ttk.Button(
             master=self.buttons_frame,
             text="Back to Main View",
@@ -52,7 +52,8 @@ class AddWordsView:
 
         info_label = ttk.Label(
             master=self.textbox_frame,
-            text="Enter your word and its definitions below. Each definition on its own line. \nThe entries are saved in data/player_dictionary.xml",
+            text="Enter your word and its definitions below. Each definition on its own line. "
+            "\nThe entries are saved in data/player_dictionary.xml",
         )
 
         word_entry_text = ttk.Label(master=self.buttons_frame, text="Word: ")
@@ -82,7 +83,7 @@ class MainView:
         self.textbox_frame.destroy()
 
     def pack(self):
-        self.answer_frame.pack()
+        self.answer_frame.pack(pady=(0, 25))
         self.textbox_frame.pack(fill="both")
 
     def update_labels(self):
@@ -103,7 +104,7 @@ class MainView:
             self.submit_button.config(state="disabled")
             self.hint_button.config(state="disabled")
         else:
-            self.insert_to_textbox(f"Wrong, try again! (-1 points)")
+            self.insert_to_textbox("Wrong, try again! (-1 points)")
         self.update_labels()
 
     def handle_new_word_button(self, *, category):
@@ -122,7 +123,8 @@ class MainView:
         for defn in definitions:
             self.insert_to_textbox(defn)
         self.insert_to_textbox(
-            "You can press the hint button to get hints, but it will decrease the amount of points you gain."
+            "You can press the hint button to get hints, "
+            "but it will decrease the amount of points you gain."
         )
         self.submit_button.config(state="normal")
         self.hint_button.config(state="normal")
@@ -145,22 +147,24 @@ class MainView:
         self.textbox.see("end")
 
     def initialize(self):
-        self.answer_frame = ttk.Frame(master=self.root)
+        self.answer_frame = tk.Frame(
+            master=self.root, highlightbackground="grey", highlightthickness=1
+        )
         self.answer_frame.bind()
         self.root.bind(
             "<Return>", lambda x: self.handle_submit_button(self.answer_entry.get())
         )
         self.textbox_frame = ttk.Frame(master=self.root)
-        self.textbox = tkinter.Text(master=self.textbox_frame)
+        self.textbox = tk.Text(master=self.textbox_frame)
 
-        answer_label = ttk.Label(master=self.answer_frame, text="The word is: ")
+        answer_label = ttk.Label(master=self.textbox_frame, text="The word is: ")
         self.total_points_label = ttk.Label(master=self.answer_frame, text="Points: 0")
         self.points_to_gain_label = ttk.Label(
             master=self.answer_frame, text="Points to gain: 0"
         )
         self.attempts_label = ttk.Label(master=self.answer_frame)
 
-        self.answer_entry = ttk.Entry(master=self.answer_frame)
+        self.answer_entry = ttk.Entry(master=self.textbox_frame)
         new_word_button = ttk.Button(
             master=self.answer_frame,
             text="New Word",
@@ -174,11 +178,11 @@ class MainView:
         self.hint_button = ttk.Button(
             master=self.answer_frame,
             text="Hint (-1)",
-            command=lambda: self.handle_hint_button(),
+            command=self.handle_hint_button,
         )
         self.submit_button = ttk.Button(
             master=self.answer_frame,
-            text="Submit",
+            text="Submit (ENTER)",
             command=lambda: self.handle_submit_button(self.answer_entry.get()),
         )
         change_view_button = ttk.Button(
@@ -197,8 +201,8 @@ class MainView:
         self.attempts_label.grid(row=1, column=1)
         self.points_to_gain_label.grid(row=1, column=3)
 
-        answer_label.grid(row=2, column=0)
-        self.answer_entry.grid(row=2, column=1)
+        answer_label.pack()
+        self.answer_entry.pack()
         self.textbox.pack(fill="both")
 
         definitions = game_service.get_readable_definitions()
@@ -208,7 +212,8 @@ class MainView:
         for defn in definitions:
             self.insert_to_textbox(defn)
         self.insert_to_textbox(
-            "You can press the hint button to get hints, but it will decrease the amount of points you gain."
+            "You can press the hint button to get hints, "
+            "but it will decrease the amount of points you gain."
         )
         self.update_labels()
 

@@ -69,7 +69,8 @@ class DictionaryService:
 
         Args:
             word (str): The custom word.
-            definitions_as_string (str): The custom word's definitions (each definition is separated by a newline).
+            definitions_as_string (str): The custom word's definitions (each definition
+            is separated by a newline).
         """
         word, definitions_as_string = word.strip(), definitions_as_string.strip()
         if len(word) == 0 or len(definitions_as_string) == 0:
@@ -95,7 +96,8 @@ class DictionaryService:
         """Return a random item from dictionary.xml or player_dictionary.xml.
 
         Args:
-            category: If "main", the item is selected from dictionary.xml. If "custom", the item is selected from player_dictionary.xml.
+            category: If "main", the item is selected from dictionary.xml. If "custom", the item is
+            selected from player_dictionary.xml.
 
         Raises:
             InvalidCategoryError: Raised if category is not "main" nor "custom".
@@ -106,7 +108,6 @@ class DictionaryService:
         if category == "custom":
 
             dictio = self.get_player_dictionary_root()
-            print(len(dictio))
             if len(dictio) == 0:
                 return False
         elif category == "main":

@@ -31,7 +31,8 @@ class GameService:
         """Chooses a new word and resets hints and points to gain.
 
         Args:
-            category: Determines if the new word is a custom word ("custom"), or a default one ("main").
+            category: Determines if the new word is a custom word ("custom"), or
+            a default one ("main").
 
         Returns:
             Item: The new word and its definitions.
@@ -74,9 +75,11 @@ class GameService:
         return self.total_points
 
     def get_attempts(self):
+        """Returns the amount of times the player has tried to guess the current word."""
         return self.attempts
 
     def increase_attempts(self):
+        """Increases the amount of attempts by one."""
         self.attempts += 1
 
     def get_points_to_gain(self):
