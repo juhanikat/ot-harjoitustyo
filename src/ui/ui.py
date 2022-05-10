@@ -180,7 +180,10 @@ class MainView:
             fg="white",
         )
         self.total_points_label = tk.Label(
-            master=self.answer_frame, fg="white", text="Points: 0"
+            master=self.answer_frame,
+            background=dark_color,
+            fg="white",
+            text="Points: 0",
         )
         self.points_to_gain_label = tk.Label(
             master=self.answer_frame,
@@ -188,7 +191,9 @@ class MainView:
             background=dark_color,
             fg="white",
         )
-        self.attempts_label = tk.Label(master=self.answer_frame, fg="white")
+        self.attempts_label = tk.Label(
+            master=self.answer_frame, background=dark_color, fg="white"
+        )
 
         self.answer_entry = tk.Entry(
             master=self.textbox_frame, background=dark_color, fg="white"
