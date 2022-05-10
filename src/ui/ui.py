@@ -58,8 +58,8 @@ class AddWordsView:
 
         info_label = tk.Label(
             master=self.textbox_frame,
-            text="Enter your word and its definitions below. Each definition on its own line. "
-            "\nThe entries are saved in data/player_dictionary.xml",
+            text="Enter your word and its definitions below. Place each definition on its own line. "
+            "\nThe entries are saved in data/player_dictionary.xml.",
             background=bg_color,
         )
 
@@ -76,7 +76,7 @@ class AddWordsView:
 
 
 class MainView:
-    """The main view where the player can guess words. Opened when the program first starts."""
+    """The main view where the player can guess words. Shown when the program first starts."""
 
     def __init__(self, root, show_add_words_view) -> None:
         self.root = root
@@ -93,7 +93,7 @@ class MainView:
 
     def pack(self):
         self.answer_frame.pack(pady=(0, 25))
-        self.textbox_frame.pack(fill="both")
+        self.textbox_frame.pack(fill="both", expand=1)
 
     def update_labels(self):
         self.attempts_label.config(text=f"Attempts: {game_service.get_attempts()}")
@@ -108,30 +108,28 @@ class MainView:
             return
         result = game_service.check_answer(answer)
         if result is True:
-            self.insert_to_textbox(f"Correct! The word was {answer}.")
-            self.insert_to_textbox(f"+{game_service.get_points_to_gain()} points")
+            self.add_to_textbox(f"Correct! The word was {answer}.")
+            self.add_to_textbox(f"+{game_service.get_points_to_gain()} points")
             self.submit_button.config(state="disabled")
             self.hint_button.config(state="disabled")
         else:
-            self.insert_to_textbox("Wrong, try again! (-1 points)")
+            self.add_to_textbox("Wrong, try again! (-1 points)")
         self.update_labels()
 
     def handle_new_word_button(self, *, category):
         item = game_service.new_item(category=category)
         if not item:
-            self.insert_to_textbox(
-                "Could not get item, your player_dictionary.xml file might be empty!"
-            )
+            self.add_to_textbox("Add words using the 'Add Custom Words' button!")
             return
         definitions = game_service.get_readable_definitions()
         self.clear_textbox()
         self.answer_entry.delete(0, "end")
-        self.insert_to_textbox(
+        self.add_to_textbox(
             f"Guess the following {game_service.get_word_length()} letter word: "
         )
         for defn in definitions:
-            self.insert_to_textbox(defn)
-        self.insert_to_textbox(
+            self.add_to_textbox(defn)
+        self.add_to_textbox(
             "You can press the hint button to get hints, "
             "but it will decrease the amount of points you gain."
         )
@@ -141,7 +139,7 @@ class MainView:
 
     def handle_hint_button(self):
         game_service.reveal_next_letter()
-        self.insert_to_textbox(f"Hint: {game_service.get_readable_underscores()}")
+        self.add_to_textbox(f"Hint: {game_service.get_readable_underscores()}")
         self.update_labels()
 
     def clear_textbox(self):
@@ -149,7 +147,7 @@ class MainView:
         self.textbox.delete(1.0, "end")
         self.textbox.config(state="disabled")
 
-    def insert_to_textbox(self, line):
+    def add_to_textbox(self, line):
         self.textbox.config(state="normal")
         self.textbox.insert("end", line + "\n")
         self.textbox.config(state="disabled")
@@ -158,8 +156,6 @@ class MainView:
     def initialize(self):
         self.answer_frame = tk.Frame(
             master=self.root,
-            highlightbackground=bg_color,
-            highlightthickness=1,
             background=dark_color,
         )
         self.answer_frame.bind()
@@ -222,15 +218,15 @@ class MainView:
 
         answer_label.pack()
         self.answer_entry.pack()
-        self.textbox.pack(fill="both")
+        self.textbox.pack(fill="both", expand=1)
 
         definitions = game_service.get_readable_definitions()
-        self.insert_to_textbox(
+        self.add_to_textbox(
             f"Guess the following {game_service.get_word_length()} letter word: "
         )
         for defn in definitions:
-            self.insert_to_textbox(defn)
-        self.insert_to_textbox(
+            self.add_to_textbox(defn)
+        self.add_to_textbox(
             "You can press the hint button to get hints, "
             "but it will decrease the amount of points you gain."
         )

@@ -18,4 +18,5 @@
 | 5.5      | 2               | Päivitetty dokumentaatiota ja lisätty napin painaminen Enter-painiketta käyttämällä |
 | 6.5      | 2               | Korjattu bugeja                                                                     |
 | 9.5      | 3               | Päivitetty dokumentaatio ja selkeytetty koodin rakennetta, päivitetty ui:ta         |
-| Yhteensä |                 | 35                                                                                  |
+| 10.5     | 2               | Päivitetty dokumentaatiota                                                          |
+| Yhteensä |                 | 37                                                                                  |

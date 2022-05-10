@@ -22,4 +22,5 @@
 ## Viikko 7
 
 - Peli on valmis
+- Dokumentaatio on valmis
 - Selkeytetty koodin rakennetta

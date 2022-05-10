@@ -9,15 +9,15 @@ source_path = os.path.dirname(__file__)
 
 
 class InvalidCategoryError(Exception):
-    pass
+    """Raised if get_random_item() gets an invalid category name in its "category" parameter."""
 
 
 class EmptyItemError(Exception):
-    pass
+    """Raised if player tries to add an empty item to the dictionary."""
 
 
 class NoDictError(Exception):
-    pass
+    """Raised if dictionary.xml does not exist."""
 
 
 class DictionaryService:
@@ -69,6 +69,8 @@ class DictionaryService:
     def add_to_player_dictionary(self, word: str, definitions_as_string: str) -> None:
         """Adds a custom word and its definitions as an element into the player_dictionary.xml file.
 
+        Raises:
+            EmptyItemError: Raised if player tries to add an empty item to the dictionary.
         Args:
             word (str): The custom word.
             definitions_as_string (str): The custom word's definitions (each definition
@@ -102,13 +104,12 @@ class DictionaryService:
             selected from player_dictionary.xml.
 
         Raises:
-            InvalidCategoryError: Raised if category is not "main" nor "custom".
+            InvalidCategoryError: Raised if category is not "main" or "custom".
 
         Returns:
             Item: A random <item> element from dictionary.xml or player_dictionary.xml.
         """
         if category == "custom":
-
             dictio = self.get_player_dictionary_root()
             if len(dictio) == 0:
                 return False

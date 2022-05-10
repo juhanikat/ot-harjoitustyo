@@ -44,7 +44,7 @@ class GameService:
         word = self.current_item.get_word()
         self.places = list(range(len(word)))
         random.shuffle(self.places)
-        # reset underscores and points to gain
+
         self.underscores = ["_" for _ in range(len(word))]
         self.points_to_gain = 10
         self.attempts = 0
