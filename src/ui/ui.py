@@ -48,7 +48,9 @@ class AddWordsView:
             background=button_color,
             fg="white",
         )
-        self.word_entry = tk.Entry(master=self.buttons_frame, fg="white")
+        self.word_entry = tk.Entry(
+            master=self.buttons_frame, background=dark_color, fg="white"
+        )
         self.definition_box = tk.Text(
             master=self.textbox_frame, background=dark_color, fg="white"
         )
@@ -181,11 +183,16 @@ class MainView:
             master=self.answer_frame, fg="white", text="Points: 0"
         )
         self.points_to_gain_label = tk.Label(
-            master=self.answer_frame, text="Points to gain: 0"
+            master=self.answer_frame,
+            text="Points to gain: 0",
+            background=dark_color,
+            fg="white",
         )
         self.attempts_label = tk.Label(master=self.answer_frame, fg="white")
 
-        self.answer_entry = tk.Entry(master=self.textbox_frame, fg="white")
+        self.answer_entry = tk.Entry(
+            master=self.textbox_frame, background=dark_color, fg="white"
+        )
         new_word_button = tk.Button(
             master=self.answer_frame,
             text="New Word",
