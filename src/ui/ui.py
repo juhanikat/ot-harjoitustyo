@@ -46,9 +46,12 @@ class AddWordsView:
             text="Add Word",
             command=self.handle_add_word_button,
             background=button_color,
+            fg="white",
         )
-        self.word_entry = tk.Entry(master=self.buttons_frame)
-        self.definition_box = tk.Text(master=self.textbox_frame, background=dark_color)
+        self.word_entry = tk.Entry(master=self.buttons_frame, fg="white")
+        self.definition_box = tk.Text(
+            master=self.textbox_frame, background=dark_color, fg="white"
+        )
         change_view_button = tk.Button(
             master=self.buttons_frame,
             text="Back to Main View",
@@ -61,6 +64,7 @@ class AddWordsView:
             text="Enter your word and its definitions below. Place each definition on its own line. "
             "\nThe entries are saved in data/player_dictionary.xml.",
             background=bg_color,
+            fg="white",
         )
 
         word_entry_text = tk.Label(
@@ -163,47 +167,59 @@ class MainView:
             "<Return>", lambda x: self.handle_submit_button(self.answer_entry.get())
         )
         self.textbox_frame = tk.Frame(master=self.root, background=dark_color)
-        self.textbox = tk.Text(master=self.textbox_frame, background=dark_color)
+        self.textbox = tk.Text(
+            master=self.textbox_frame, background=dark_color, fg="white"
+        )
 
         answer_label = tk.Label(
-            master=self.textbox_frame, text="The word is: ", background=dark_color
+            master=self.textbox_frame,
+            text="The word is: ",
+            background=dark_color,
+            fg="white",
         )
-        self.total_points_label = tk.Label(master=self.answer_frame, text="Points: 0")
+        self.total_points_label = tk.Label(
+            master=self.answer_frame, fg="white", text="Points: 0"
+        )
         self.points_to_gain_label = tk.Label(
             master=self.answer_frame, text="Points to gain: 0"
         )
-        self.attempts_label = tk.Label(master=self.answer_frame)
+        self.attempts_label = tk.Label(master=self.answer_frame, fg="white")
 
-        self.answer_entry = tk.Entry(master=self.textbox_frame)
+        self.answer_entry = tk.Entry(master=self.textbox_frame, fg="white")
         new_word_button = tk.Button(
             master=self.answer_frame,
             text="New Word",
             command=lambda: self.handle_new_word_button(category="main"),
             background=button_color,
+            fg="white",
         )
         new_custom_word_button = tk.Button(
             master=self.answer_frame,
             text="New Custom Word",
             command=lambda: self.handle_new_word_button(category="custom"),
             background=button_color,
+            fg="white",
         )
         self.hint_button = tk.Button(
             master=self.answer_frame,
             text="Hint (-1)",
             command=self.handle_hint_button,
             background=button_color,
+            fg="white",
         )
         self.submit_button = tk.Button(
             master=self.answer_frame,
             text="Submit (ENTER)",
             command=lambda: self.handle_submit_button(self.answer_entry.get()),
             background=button_color,
+            fg="white",
         )
         change_view_button = tk.Button(
             master=self.answer_frame,
             text="Add Custom Words",
             command=self.show_add_words_view,
             bg=button_color,
+            fg="white",
         )
 
         self.submit_button.grid(row=0, column=0)
