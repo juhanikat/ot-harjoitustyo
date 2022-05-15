@@ -19,4 +19,4 @@
 | 6.5      | 2               | Korjattu bugeja                                                                     |
 | 9.5      | 3               | Päivitetty dokumentaatio ja selkeytetty koodin rakennetta, päivitetty ui:ta         |
 | 10.5     | 2               | Päivitetty dokumentaatiota                                                          |
-| Yhteensä |                 | 37                                                                                  |
+| Yhteensä |                 | 39                                                                                  |
